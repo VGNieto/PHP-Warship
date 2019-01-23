@@ -11,6 +11,7 @@ public function __construct(){
 
 public function añadirJugadorDB($usuario,$contraseña){
 
+    if($this->comprobarExistente($usuario) == false){
 
     $conexion = mysqli_connect("localhost","root","","hundirlaflota");
 
@@ -24,9 +25,27 @@ public function añadirJugadorDB($usuario,$contraseña){
 
     
     mysqli_close($conexion);
-
+    return true;
+    } else{
+        return false;
+    }
 }
 
+public function comprobarIDUsuarioDB($nombre){
+    $conexion = mysqli_connect("localhost","root","","hundirlaflota");
+    $insertar = "select IdJugador from jugadores where Usuario='$nombre'";
+    $datos = array();
+    $resultado = mysqli_query($conexion,$insertar) or die("Problemas al devolver un jugador: " .mysqli_error($conexion));
+    while ($results = mysqli_fetch_array($resultado)) {
+        $datos[] = $results[0];
+     }
+     mysqli_close($conexion);
+     if(count($datos) == 0){
+         return false;
+     } else{
+         return $datos[0];
+     }
+}
 public function devolverUsuariosDB(){
 
 
@@ -40,6 +59,23 @@ public function devolverUsuariosDB(){
     mysqli_close($conexion);
     return $datos;
 
+}
+
+public function comprobarExistente($usuario){
+    $conexion = mysqli_connect("localhost","root","","hundirlaflota");
+    $insertar = "select * from jugadores where Usuario='$usuario'";
+    $datos = array();
+    $resultado = mysqli_query($conexion,$insertar) or die("Problemas al devolver un jugador: " .mysqli_error($conexion));
+    while ($results = mysqli_fetch_array($resultado)) {
+        $datos[] = $results[0];
+     }
+     mysqli_close($conexion);
+     if(count($datos) == 0){
+         return false;
+     } else{
+         return $datos[0];
+     }
+  
 }
 
 public function comprobarUsuarioDB($usuario,$contraseña){
@@ -58,8 +94,5 @@ public function comprobarUsuarioDB($usuario,$contraseña){
      }
   
 }
-
-
-
 
 }

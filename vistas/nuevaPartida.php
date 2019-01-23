@@ -17,25 +17,21 @@
             <form action="index.php" method="post">
             
                 <img class="responsive-img" style="text-align:center"  src="./img/logo.png">
-                <input type="hidden" name="op" value="login">
+                <input type="hidden" name="op" value="menuPrincipal">
                 <div class="input-field col s6">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input type="text" id="icon_prefix" name="loginUsuario" class="input-field validate"  value="">
-                    <label for="icon_prefix">Usuario</label>
+                    <i class="material-icons prefix">videogame_asset</i>
+                    <input type="text" id="icon_prefix" name="nombrePartida" class="input-field validate"  value="">
+                    <label for="icon_prefix">Nombre de la Partida</label>
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix">lock   </i>
-                    <input type="text" id="icon_prefix2" name="loginContraseña" class="input-field" value="">
-                    <label for="icon_prefix2">Contraseña</label>
+                    <input type="text" id="icon_prefix2" name="contraseñaPartida" class="input-field" value="">
+                    <label for="icon_prefix2">Contraseña (opcional)</label>
                 </div>
-                <button type="submit" class=" waves-effect waves-light btn" name="loginDone" value="Iniciar Sesión">Iniciar Sesión <i class="material-icons right">send</i></button>
-                <button type="submit" class=" waves-effect waves-light btn" name="registrarse" value="Registrarse">Registrarse <i class="large material-icons right">contacts</i></button>
+                <button type="submit" class=" waves-effect waves-light btn" name="crearPartida" value="crearPartida">Crear Partida <i class="material-icons right">create</i></button>
+                <button type="submit" class=" waves-effect waves-light btn" name="volverAlMenu" value="volverAlMenu">Volver al menú<i class="large material-icons right">arrow_back</i></button>
 
-                <?php
-                    if(isset($_POST['loginDone'])){
-                        echo "<p class='flow-text' style='font-size:20px'>No existe el usuario amigo.</p>";
-                    }
-                ?>
+                
             </form>
         </div>
         <script type="text/javascript" src="./js/materialize.min.js"></script>

@@ -11,36 +11,40 @@
     <link type="text/css" rel="stylesheet" href="./css/menuprincipal.css"  media="screen,projection"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    
+    <style>
+        body{
+            background-image: url("./img/fondo3.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
     <?php    
         if(isset($_SESSION['usuario'])){
            ?>
            <div class="container center-align "  style="width:500px;" id="formulario">
-            <form action="index.php" method="post">
+           <form action="index.php" method="post">
                 <img class="responsive-img" style="text-align:center"  src="./img/logo.png">
                 <div id="menu" class="z-depth-5 teal blue">  
-                    <h4 class="center-align">Menu principal </h4>
-                    <div class="collection">
-                        <a class="collection-item" href="">Nueva partida</a></button>
-                        <a class="collection-item" href="">Lista de partidas</a></button>
-                        <a class="collection-item" href="">Entrar con codigo</a></button>
-                        <a class="collection-item" href="">Opciones</a></button>
-                        <a class="collection-item" href="./login.php">Salir</a></button>
-                        <input class="collection-item" type="submit" name="op" value="Salir" >
-                    </div>
+                    <h4 class="center-align white-text" style="font-family: Impact, Charcoal, sans-serif">Menú principal </h4>
+                    
+                        <input type="hidden" name="op" value="menuPrincipal">
+                        <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="nuevaPartida" value="Nueva Partida">Nueva Partida <i class="material-icons right">fiber_new</i></button><br><br>
+                        <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="listaPartidas" value="Lista Partidas">Lista de Partidas<i class="material-icons right">format_list_bulleted</i></button><br><br>
+                        <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="Unirse" value="Unirse por código">Unirse con código <i class="material-icons right">code</i></button><br><br>
+                        <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="Opciones" value="Opciones">Opciones<i class="material-icons right">build</i></button><br><br>
+                        <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="Salir" value="Salir">Salir <i class="material-icons right">cancel</i></button><br><br>
+                     
                 </div>
-            </form>
+           
             </div>
             <?php
         }
             ?>
-    ?>
     
     
-    
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <script type="text/javascript" src="./js/materialize.min.js"></script>
     
 </body>
 </html>

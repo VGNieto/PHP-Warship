@@ -15,11 +15,21 @@ public function mostrarLogin(){
 
 }
 
-public function mostrarError(){
-    echo "no amigo";
+public function mostrarRegistro($value){
+    $registrado = false;
+    if($value == true){
+        $registrado = true;
+    }
+    include "./vistas/registrarUsuario.php";
+
 }
+
 function añadirUsuario($usuario,$contraseña){
-    $this->añadirJugadorDB($usuario,$contraseña);
+    return $this->añadirJugadorDB($usuario,$contraseña);
+}
+
+function idUsuario($nombre){
+    return $this->comprobarIDUsuarioDB($nombre);
 }
 
 function devolverUsuarios(){
