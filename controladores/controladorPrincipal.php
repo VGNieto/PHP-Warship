@@ -73,6 +73,8 @@ public function controlarOpcion(){
                             }
                         } else if(isset($_REQUEST['partidasEnCurso'])){
                             $menuPrincipal->mostrarPartidasEnCurso($_SESSION['idUsuario']);
+                        } else if(isset($_REQUEST['entrarPartida'])){
+                            $partida->mostrarPartida($_SESSION['idUsuario']);
                         }
                         break;
             case 'partida': 

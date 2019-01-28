@@ -118,10 +118,12 @@ public function borrarPartidaDB($id){
 
 public function partidasEnCursoDB($id){
 
-$conexion = mysqli_connect("localhost","root","","hundirlaflota");
+    $conexion = mysqli_connect("localhost","root","","hundirlaflota");
     $insertar = "select distinct IDPartida,jugadores.Usuario,estadospartida.Descripcion,nombrePartida,passwordPartida from partidas
                         ,Jugadores,estadosPartida where jugadores.IDJugador = partidas.IDHost and
-                        estadosPartida.IDEstadoPartida = partidas.IDEstadoPartida and partidas.IDHost = $id";
+                        estadosPartida.IDEstadoPartida = partidas.IDEstadoPartida and partidas.IDHost = $id
+                        or partidas.IDContrincante = $id and jugadores.IDJugador = partidas.IDHost and
+                        estadosPartida.IDEstadoPartida = partidas.IDEstadoPartida";
     $datos = array();
     $resultado = mysqli_query($conexion,$insertar) or die("Problemas al devolver un jugador: " .mysqli_error($conexion));
     while ($results = mysqli_fetch_array($resultado)) {
