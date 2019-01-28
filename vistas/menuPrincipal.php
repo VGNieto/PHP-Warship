@@ -11,7 +11,13 @@
     <link type="text/css" rel="stylesheet" href="./css/menuprincipal.css"  media="screen,projection"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
+    <style>
+        body{
+            background-image: url("./img/fondo3.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
     <?php    

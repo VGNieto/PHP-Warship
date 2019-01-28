@@ -29,6 +29,7 @@ public function controlarOpcion(){
                         if(isset($_REQUEST['loginDone'])){
                             if($usuarios->comprobarUsuario($_REQUEST['loginUsuario'],$_REQUEST['loginContraseña'])){
                                 $_SESSION['usuario'] = $_REQUEST['loginUsuario'];
+                                $_SESSION['idUsuario'] = $usuarios->comprobarUsuario($_REQUEST['loginUsuario'],$_REQUEST['loginContraseña']);
                                 $menuPrincipal->mostrarMenu();
                             } else{
                                 $usuarios->mostrarLogin();
@@ -52,23 +53,32 @@ public function controlarOpcion(){
                                $menuPrincipal->mostrarMenu();
                         }else if(isset($_REQUEST['crearPartida'])){
                             if($menuPrincipal->crearPartida($usuarios->idUsuario($_SESSION['usuario']),$_REQUEST['nombrePartida'],$_REQUEST['contraseñaPartida'])){
-                               $menuPrincipal->mostrarPartidas();
+                               $menuPrincipal->mostrarPartidas($usuarios->idUsuario($_SESSION['usuario']));
                             } else{
                                $menuPrincipal->mostrarNuevaPartida();
                             }
                         } else if(isset($_REQUEST['listaPartidas'])){
-                            $menuPrincipal->mostrarPartidas();
+                            $menuPrincipal->mostrarPartidas($usuarios->idUsuario($_SESSION['usuario']));
                           
                         } else if(isset($_REQUEST['Salir'])){
                             session_destroy();
                             $usuarios->mostrarLogin();
                         } else if(isset($_REQUEST['partidaSeleccionada'])){
                             if($menuPrincipal->unirseAPartida($_REQUEST['partidaSeleccionada'],$usuarios->idUsuario($_SESSION['usuario']))){
-                                $partidas->mostrarPartida($_REQUEST['partidaSeleccionada']);
+                                $partida->mostrarPartida($_REQUEST['partidaSeleccionada']);
                             };
+                        } else if(isset($_REQUEST['borrarPartida'])){
+                            if($menuPrincipal->borrarPartida($_REQUEST['borrarPartida'])){
+                                $menuPrincipal->mostrarPartidas($usuarios->idUsuario($_SESSION['usuario']));
+                            }
+                        } else if(isset($_REQUEST['partidasEnCurso'])){
+                            $menuPrincipal->mostrarPartidasEnCurso($_SESSION['idUsuario']);
                         }
                         break;
-            case 'partida':
+            case 'partida': 
+                        if(isset($_REQUEST['volverAlMenu'])){
+                            $menuPrincipal->mostrarMenu();
+                        }
                         break;
                            
         }

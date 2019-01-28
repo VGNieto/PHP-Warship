@@ -24,8 +24,9 @@
             <form action="index.php" method="post">
             
                 <img class="responsive-img" style="text-align:center"  src="./img/logo.png">
+                
                 <input type="hidden" name="op" value="menuPrincipal">
-                <?php $partidas = $this->listaPartidas(); ?>
+                <?php $partidas = $this->listaPartidasEnCurso($_SESSION['idUsuario']); ?>
                 <div id="menu" class="z-depth-5 teal blue">  
                 <table class="striped highlight centered responsive-table">
                     <thead>
@@ -44,7 +45,7 @@
                                     <td>$values[4]</td>
                                     <td>$values[1]</td>
                                     ";if($values[2] == null && $values[1] != $_SESSION['usuario']){
-                                        echo "<td><button type='submite' class='waves-effect waves-light btn' name='partidaSeleccionada' value='$values[0]'>Unirse<i class='large material-icons right'>arrow_forward</i></button>";
+                                        echo "<td><button type='submite' class='waves-effect waves-light btn' name='partidaSeleccionada' value='$values[0]'>Unirse<i class='large material-icons right'>arrow_forward</i></button></td>";
                                      } else{
                                          echo "<td>$values[2]</td>";
                                      }
@@ -52,14 +53,16 @@
                                     <td>$values[3]</td>";
                                     
                                     if($values[1] == $_SESSION['usuario']){
-                                        echo "<td><button type='submite' class='waves-effect waves-light btn' name='borrarPartida' value='$values[0]'>Borrar<i class='large material-icons right'>remove_circle</i></button>";
+                                        echo "<td><button type='submite' class='waves-effect waves-light btn' name='borrarPartida' value='$values[0]'>Borrar<i class='large material-icons right'>remove_circle</i></button></td>";
                                     };
                                     
-                                 echo "</tr>";
+                                 echo "<td><button type='submite' class='waves-effect waves-light btn' name='entrarPartida' value='$values[0]'>Entrar<i class='large material-icons right'>arrow_forward</i></button></td>
+                                 
+                                        </tr>";
                         } ?>
                     </tbody>
                 </table>
-                    </div>
+                </div>
                 <button type="submit" class=" waves-effect waves-light btn" name="volverAlMenu" value="volverAlMenu">Volver al menú<i class="large material-icons right">arrow_back</i></button>
 
                 

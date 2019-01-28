@@ -10,6 +10,13 @@
     <link type="text/css" rel="stylesheet" href="./css/materialize.min.css"  media="screen,projection"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        body{
+            background-image: url("./img/fondo3.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
 
@@ -18,15 +25,17 @@
             
                 <img class="responsive-img" style="text-align:center"  src="./img/logo.png">
                 <input type="hidden" name="op" value="login">
+                <div id="menu" class="z-depth-5 teal blue">  
                 <div class="input-field col s6">
-                    <i class="material-icons prefix">account_circle</i>
+                    <i class="material-icons prefix white-text">account_circle</i>
                     <input type="text" id="icon_prefix" name="loginUsuario" class="input-field validate"  value="">
-                    <label for="icon_prefix">Usuario</label>
+                    <label for="icon_prefix"class="white-text">Usuario</label>
                 </div>
                 <div class="input-field col s6">
-                    <i class="material-icons prefix">lock   </i>
+                    <i class="material-icons prefix white-text">lock   </i>
                     <input type="text" id="icon_prefix2" name="loginContraseña" class="input-field" value="">
-                    <label for="icon_prefix2">Contraseña</label>
+                    <label for="icon_prefix2" class="white-text">Contraseña</label>
+                </div>
                 </div>
                 <button type="submit" class=" waves-effect waves-light btn" name="loginDone" value="Iniciar Sesión">Iniciar Sesión <i class="material-icons right">send</i></button>
                 <button type="submit" class=" waves-effect waves-light btn" name="registrarse" value="Registrarse">Registrarse <i class="large material-icons right">contacts</i></button>

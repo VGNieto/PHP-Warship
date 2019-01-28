@@ -10,13 +10,6 @@ public function __construct(){
 
 public function mostrarPartida($id){
 
-
-    
-
-
-
-
-
     include "./vistas/mostrarPartida.php";
 
 }
