@@ -11,13 +11,7 @@
     <link type="text/css" rel="stylesheet" href="./css/menuprincipal.css"  media="screen,projection"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-        body{
-            background-image: url("./img/fondo3.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-    </style>
+
 </head>
 <body>
     <?php    
@@ -32,8 +26,7 @@
                         <input type="hidden" name="op" value="menuPrincipal">
                         <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="nuevaPartida" value="Nueva Partida">Nueva Partida <i class="material-icons right">fiber_new</i></button><br><br>
                         <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="listaPartidas" value="Lista Partidas">Lista de Partidas<i class="material-icons right">format_list_bulleted</i></button><br><br>
-                        <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="Unirse" value="Unirse por código">Unirse con código <i class="material-icons right">code</i></button><br><br>
-                        <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="Opciones" value="Opciones">Opciones<i class="material-icons right">build</i></button><br><br>
+                        <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="partidasEnCurso" value="Partidas en Curso">Partidas en Curso <i class="material-icons right">format_list_bulleted</i></button><br><br>
                         <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="Salir" value="Salir">Salir <i class="material-icons right">cancel</i></button><br><br>
                      
                 </div>

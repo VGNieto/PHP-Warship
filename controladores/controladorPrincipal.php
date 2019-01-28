@@ -17,7 +17,9 @@ public function controlarOpcion(){
     
     $usuarios = new Usuarios();
     $menuPrincipal = new Menu();
-    //$partida = new Partida();
+    $partida = new Partida();
+
+    
    
     if(isset($_POST['op'])){
         $opcion = $_POST['op'];
@@ -50,22 +52,33 @@ public function controlarOpcion(){
                                $menuPrincipal->mostrarMenu();
                         }else if(isset($_REQUEST['crearPartida'])){
                             if($menuPrincipal->crearPartida($usuarios->idUsuario($_SESSION['usuario']),$_REQUEST['nombrePartida'],$_REQUEST['contraseñaPartida'])){
-                                //$partidas->mostrarPartida($id);
+                               $menuPrincipal->mostrarPartidas();
                             } else{
                                $menuPrincipal->mostrarNuevaPartida();
                             }
+                        } else if(isset($_REQUEST['listaPartidas'])){
+                            $menuPrincipal->mostrarPartidas();
+                          
                         } else if(isset($_REQUEST['Salir'])){
                             session_destroy();
                             $usuarios->mostrarLogin();
-                        } 
+                        } else if(isset($_REQUEST['partidaSeleccionada'])){
+                            if($menuPrincipal->unirseAPartida($_REQUEST['partidaSeleccionada'],$usuarios->idUsuario($_SESSION['usuario']))){
+                                $partidas->mostrarPartida($_REQUEST['partidaSeleccionada']);
+                            };
+                        }
+                        break;
+            case 'partida':
+                        break;
                            
         }
 
 
 
-    }else{
-        $usuarios->mostrarLogin();
-    }
+    }else if(isset($_SESSION['usuario'])){
+        $menuPrincipal->mostrarMenu();
+        
+    } else{$usuarios->mostrarLogin();}
     
 
 
