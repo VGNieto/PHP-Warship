@@ -74,13 +74,15 @@ public function controlarOpcion(){
                         } else if(isset($_REQUEST['partidasEnCurso'])){
                             $menuPrincipal->mostrarPartidasEnCurso($_SESSION['idUsuario']);
                         } else if(isset($_REQUEST['entrarPartida'])){
-                            $partida->mostrarPartida($_SESSION['idUsuario']);
+                            $partida->crearTableros($_REQUEST['entrarPartida']);
                         }
                         break;
             case 'partida': 
                         if(isset($_REQUEST['volverAlMenu'])){
                             $menuPrincipal->mostrarMenu();
                         }
+
+
                         break;
                            
         }

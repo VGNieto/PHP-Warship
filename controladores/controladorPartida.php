@@ -8,10 +8,25 @@ public function __construct(){
    
 }
 
-public function mostrarPartida($id){
-
+public function mostrarPartida($idPartida){
+    $tableros = $this->mostrarTableros($idPartida);
     include "./vistas/mostrarPartida.php";
 
+}
+
+public function mostrarTableros($idPartida){
+
+
+    $tableros = $this->devolverTablerosDB($idPartida);
+    return $tableros;
+}
+
+public function crearTableros($idPartida){
+    if($this->crearTablerosDB($idPartida)){
+        $this->mostrarPartida($idPartida);
+    } else{
+        $this->mostrarPartida($idPartida);
+    };
 }
 
 

@@ -40,25 +40,26 @@
                     </thead>
 
                     <tbody>
-                        <?php for ($i=0; $i < count($partidas) ; $i++) { 
-                            $values = $partidas[$i]->getValueS();
-                            echo "<tr>
-                                    <td>$values[4]</td>
-                                    <td>$values[1]</td>
-                                    ";if($values[2] == null && $values[1] != $_SESSION['usuario']){
-                                        echo "<td><button type='submite' class='waves-effect waves-light btn' name='partidaSeleccionada' value='$values[0]'>Unirse<i class='large material-icons right'>arrow_forward</i></button>";
-                                     } else{
-                                         echo "<td>$values[2]</td>";
-                                     }
-                                    echo "
-                                    <td>$values[3]</td>";
-                                    
-                                    if($values[1] == $_SESSION['usuario']){
-                                        echo "<td><button type='submite' class='waves-effect waves-light btn' name='borrarPartida' value='$values[0]'>Borrar<i class='large material-icons right'>remove_circle</i></button>";
-                                    };
-                                    
-                                 echo "</tr>";
-                        } ?>
+                        <?php if($partidas != false){
+                                for ($i=0; $i < count($partidas) ; $i++) { 
+                                $values = $partidas[$i]->getValueS();
+                                echo "<tr>
+                                        <td>$values[4]</td>
+                                        <td>$values[1]</td>
+                                        ";if($values[2] == null && $values[1] != $_SESSION['usuario']){
+                                            echo "<td><button type='submite' class='waves-effect waves-light btn' name='partidaSeleccionada' value='$values[0]'>Unirse<i class='large material-icons right'>arrow_forward</i></button>";
+                                        } else{
+                                            echo "<td>$values[2]</td>";
+                                        }
+                                        echo "
+                                        <td>$values[3]</td>";
+                                        
+                                        if($values[1] == $_SESSION['usuario']){
+                                            echo "<td><button type='submite' class='waves-effect waves-light btn' name='borrarPartida' value='$values[0]'>Borrar<i class='large material-icons right'>remove_circle</i></button>";
+                                        };
+                                        
+                                    echo "</tr>";
+                        } }?>
                     </tbody>
                 </table>
             </div>

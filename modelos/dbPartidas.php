@@ -98,9 +98,9 @@ public function unirseAPartidaDB($idPartida,$idContrincante){
      
 }
 
-public function borrarPartidaDB($id){
+public function borrarPartidaDB($idPartida){
     $conexion = mysqli_connect("localhost","root","","hundirlaflota");
-    $insertar = "select * from partidas where IdPartida=$id";
+    $insertar = "select * from partidas where IdPartida=$idPartida";
     $datos = array();
     $resultado = mysqli_query($conexion,$insertar) or die("Problemas al devolver un jugador: " .mysqli_error($conexion));
     while ($results = mysqli_fetch_array($resultado)) {
@@ -110,11 +110,22 @@ public function borrarPartidaDB($id){
      if(count($datos) == 0){
          return false;
      } else{
-        mysqli_query($conexion,"delete from partidas where IDPartida = $id")or die("Problemas al devolver un jugador: " .mysqli_error($conexion));
+        
+        $consultaTableros = "select IDTablero from tableros where IDPartida = $idPartida";
+        $queryTableros = mysqli_query($conexion,$consultaTableros) or die("Problemas al devolver los tableros:".mysqli_error($conexion));
+        while($results = mysqli_fetch_array($queryTableros)){
+            $tableros[] = $results[0];
+        }        
+
+        mysqli_query($conexion,"delete from casillas where IdTablero = $tableros[0]");
+        mysqli_query($conexion,"delete from casillas where IdTablero = $tableros[1]");
+        mysqli_query($conexion,"delete from partidas where IDPartida = $idPartida")or die("Problemas al devolver un jugador: " .mysqli_error($conexion));
         return true;
     }
   
 }
+
+
 
 public function partidasEnCursoDB($id){
 
@@ -155,6 +166,113 @@ public function partidasEnCursoDB($id){
 }
 
 
+public function crearTablerosDB($idPartida){
+
+    $letras = ["A","B","C","D","E","F","G","H","I","J"];
+    $numeros = [1,2,3,4,5,6,7,8,9,10];
+
+    $consultaIDs = "select IDHost,IDContrincante from partidas where idPartida = $idPartida";
+
+
+    $conexion = mysqli_connect("localhost","root","","hundirlaflota");
+
+    $queryIDs = mysqli_query($conexion,$consultaIDs);
+    $datos = mysqli_fetch_array($queryIDs);
+
+    if($datos[0] != null && $datos[1] != null){
+
+        
+        $comprobarExistente = "select * from tableros where IDPArtida=$idPartida";
+        if(mysqli_num_rows(mysqli_query($conexion,$comprobarExistente))>0){
+            mysqli_close($conexion);
+            return false;
+        } else{
+
+            $ultimoTablero = "select max(IDTablero) from tableros";
+            $ultimoValor = mysqli_fetch_array(mysqli_query($conexion,$ultimoTablero));        
+
+            $crearTableros = "insert into tableros values($ultimoValor[0]+1,$datos[0],$idPartida),($ultimoValor[0]+2,$datos[1],$idPartida)";
+            mysqli_query($conexion,$crearTableros) or die("Problemas al crear los tableros: ". mysqli_error($conexion));
+            
+            $consultaTableros = "select IDTablero from tableros where IDPartida = $idPartida";
+            $queryTableros = mysqli_query($conexion,$consultaTableros);
+            while($results = mysqli_fetch_array($queryTableros)){
+                $tableros[] = $results[0];
+            }
+       
+            $añadirCasilla = "insert into casillas(Letra,Numero,IDTablero,IDEstadoCasilla) values";
+            for($i = 0; $i<10;$i++){
+                for($j = 0;$j<10;$j++){
+                    $añadirCasilla .= "('$letras[$i]',$numeros[$j],$tableros[0],1),";
+                   
+                }
+            }
+            $añadirCasilla =  substr($añadirCasilla,0,strlen($añadirCasilla)-1);
+            mysqli_query($conexion,$añadirCasilla) or die("Problemas amigo".mysqli_error($conexion));
+            
+            $añadirCasilla = "insert into casillas(Letra,Numero,IDTablero,IDEstadoCasilla) values";
+            for($i = 0; $i<10;$i++){
+                for($j = 0;$j<10;$j++){
+                    $añadirCasilla .= "('$letras[$i]',$numeros[$j],$tableros[1],1),";
+                   
+                }
+            }
+            $añadirCasilla =  substr($añadirCasilla,0,strlen($añadirCasilla)-1);
+             mysqli_query($conexion,$añadirCasilla) or die("Problemas amigo".mysqli_error($conexion));
+
+
+            }
+            mysqli_close($conexion);
+            return true;
+        
+
+    }
+
+
+
+
+
+}
+
+public function devolverTablerosDB($idPartida){
+
+    $conexion = mysqli_connect("localhost","root","","hundirlaflota");
+    $tableros;
+    $consultaTableros = "select IDTablero from tableros where IDPartida = $idPartida";
+    $queryTableros = mysqli_query($conexion,$consultaTableros) or die("Problemas al devolver los tableros:".mysqli_error($conexion));
+    while($results = mysqli_fetch_array($queryTableros)){
+        $tableros[] = $results[0];
+        
+    }
+    
+    if(count($tableros)!=0){
+        $tableroHostArray;
+        $tableroHost = "select * from casillas where IDTablero = $tableros[0]";
+        $queryTableroHost = mysqli_query($conexion,$tableroHost);
+        while($results = mysqli_fetch_array($queryTableroHost)){
+            $tableroHostArray[] = [$results[0],$results[1],$results[2],$results[3],$results[4]];
+        }
+
+        $tableroContrincanteArray;
+        $tableroContrincante = "select * from casillas where IDTablero = $tableros[0]";
+        $queryTableroContrincante = mysqli_query($conexion,$tableroContrincante);
+        while($results = mysqli_fetch_array($queryTableroContrincante)){
+            $tableroContrincanteArray[] = [$results[0],$results[1],$results[2],$results[3],$results[4]];
+        }
+
+        $tablerosDevolver[0] = $tableroHostArray;
+        $tablerosDevolver[1] = $tableroContrincanteArray;
+
+        return  $tablerosDevolver;
+    }
+
+
+
+
+
+
+
+}
 
 
 }

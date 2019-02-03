@@ -29,13 +29,22 @@ public function borrarPartida($id){
 }
 
 public function listaPartidas(){
-    return $this->mostrarPartidasDB();
+    
+     if( $this->mostrarPartidasDB()){
+         $partidas = $this->mostrarPartidasDB();
+         return $partidas;
+     } else{
+         return false;
+     }
 }
 public function listaPartidasEnCurso($id){
-    return $this->partidasEnCursoDB($id);
+    if( $this->partidasEnCursoDB($id)){
+        $partidas = $this->partidasEnCursoDB($id);
+        return $partidas;
+    } else{
+        return false;
+    }
 }
-
-
 
 public function unirseAPartida($idPartida,$idContrincante){
     return $this->unirseAPartidaDB($idPartida,$idContrincante);
