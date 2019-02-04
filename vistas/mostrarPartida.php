@@ -29,13 +29,23 @@
 
     <div class="container row">
         <form action="index.php" method="post">
-            <div class="col s6 left teal lighten-2">
+            <div class="col s6 left blue lighten-4 ">
                 <h5 style="font-family:Courier New, Courier, monospace;" class="center-align">TU TABLERO</h5>
                 <table class="centered responsive-table">
                 
                     <thead>
                         <tr>
-                            <th></th>
+                            <th> </th>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>C</th>
+                            <th>D</th>
+                            <th>E</th>
+                            <th>F</th>
+                            <th>G</th>
+                            <th>H</th>
+                            <th>I</th>
+                            <th>J</th>
                         </tr>
                     </thead>
 
@@ -46,7 +56,7 @@
                             $contador = 0;
                             for($j = 0; $j<10;$j++){
                                 echo "<tr>";                        
-                                
+                                echo "<td>".$tableros[0][$j][2]."</td>";
                                 for($i =$contador; $i<$contador+10;$i++){
                                     echo "<td id=".$tableros[0][$i][1]."".$tableros[0][$i][2]."><img src='img/agua.png' width=30px; height=30px; style='opacity:0.4';/></td>";
                                 }
@@ -58,13 +68,23 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col s6 right teal lighten-2">
+            <div class="col s6 right blue lighten-2">
                 <h5 style="font-family:Courier New, Courier, monospace;" class="center-align">TABLERO ENEMIGO</h5>  
                 <table class="centered responsive-table ">
                 
                     <thead>
                         <tr>
-                            <th></th>
+                            <th> </th>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>C</th>
+                            <th>D</th>
+                            <th>E</th>
+                            <th>F</th>
+                            <th>G</th>
+                            <th>H</th>
+                            <th>I</th>
+                            <th>J</th>
                         </tr>
                     </thead>
 
@@ -72,8 +92,10 @@
                     <?php 
                             $contador = 0;
                             for($j = 0; $j<10;$j++){
-                                echo "<tr>";                        
                                 
+                                echo "<tr>";                        
+                                echo "<td>".$tableros[1][$j][2]."</td>";
+
                                 for($i =$contador; $i<$contador+10;$i++){
                                     echo "<td id=".$tableros[1][$i][1]."".$tableros[1][$i][2]."><img src='img/agua.png' width=30px; height=30px; style='opacity:0.4';/></td>";
                                 }
