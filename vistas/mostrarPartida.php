@@ -58,7 +58,7 @@
                                 echo "<tr>";                        
                                 echo "<td>".$tableros[0][$j][2]."</td>";
                                 for($i =$contador; $i<$contador+10;$i++){
-                                    echo "<td id=".$tableros[0][$i][1]."".$tableros[0][$i][2]."><img src='img/agua.png' width=30px; height=30px; style='opacity:0.4';/></td>";
+                                    echo "<td id=".$tableros[0][$i][1]."".$tableros[0][$i][2]."><img src='img/agua.png' width=30px height=30px style='opacity:0.4;' alt='submit'></td>";
                                 }
                                 $contador+=10;
                             echo "</tr>";
@@ -97,7 +97,7 @@
                                 echo "<td>".$tableros[1][$j][2]."</td>";
 
                                 for($i =$contador; $i<$contador+10;$i++){
-                                    echo "<td id=".$tableros[1][$i][1]."".$tableros[1][$i][2]."><img src='img/agua.png' width=30px; height=30px; style='opacity:0.4';/></td>";
+                                    echo "<td id=".$tableros[1][$i][1]."".$tableros[1][$i][2]."><input type='image' src='img/agua.png' width=30px height=30px style='opacity:0.4;' alt='submit'></td>";
                                 }
                                 $contador+=10;
                             echo "</tr>";
