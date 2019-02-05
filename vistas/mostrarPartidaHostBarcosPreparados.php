@@ -69,7 +69,7 @@
                             
                                 //EL HOST ESTÁ PRIMERO
                                 
-                                echo $mensaje;
+                                echo $mensajeHost;
                                 for($j = 1; $j<=10;$j++){
                                     echo "<tr>";                        
                                     echo "<td>".$filas[$j-1]."</td>";
@@ -79,18 +79,57 @@
                                         if(in_array($posicion,$posiciones) != false){
                                             
                                             $id = $posicion."-".$_SESSION['idUsuario'];
-                                            echo "<td><button type='submit' id='casillaBarco' name='casilla' value='$id'></button></td>";
+                                            echo "<td><button type='submit' disabled id='casillaBarco' name='casilla' value='$id'></button></td>";
                                         } else{
                                             $id = $posicion."-".$_SESSION['idUsuario'];
-                                            echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                            echo "<td><button type='submit' disabled id='casillaAgua' name='casilla' value='$id'></button></td>";
                                         }
                                         
                                     }
                                     
                                     echo "</tr>";
                                 }
+                            }
+
+                         } else{
+
+                            $filas = [1,2,3,4,5,6,7,8,9,10];
+                            $columnas = [1,2,3,4,5,6,7,8,9,10];
+                            $posiciones;
+                                
+                            if($tableros[1]!=false){
+
+                                for($i = 0;$i<count($tableros[1]);$i++){
+                                    $posiciones[] = $tableros[1][$i][1]."".$tableros[1][$i][2];
+                                }
+                                
+                                    //EL HOST ESTÁ PRIMERO
+                                    
+                                    echo $mensaje;
+                                    for($j = 1; $j<=10;$j++){
+                                        echo "<tr>";                        
+                                        echo "<td>".$filas[$j-1]."</td>";
+                                        for($i =1; $i<=10;$i++){
+                                            $posicion = $j.$i;
+                                            
+                                            if(in_array($posicion,$posiciones) != false){
+                                                
+                                                $id = $posicion."-".$_SESSION['idUsuario'];
+                                                echo "<td><button type='submit' disabled id='casillaBarco' name='casilla' value='$id'></button></td>";
+                                            } else{
+                                                $id = $posicion."-".$_SESSION['idUsuario'];
+                                                echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                            }
+                                            
+                                        }
+                                        
+                                        echo "</tr>";
+                                    }
                             } else{
-                                echo $mensaje;
+                                $filas = [1,2,3,4,5,6,7,8,9,10];
+                                $columnas = [1,2,3,4,5,6,7,8,9,10];
+                                $posiciones;
+                                    echo $mensaje;
                                 for($j = 1; $j<=10;$j++){
                                     echo "<tr>";                        
                                     echo "<td>".$filas[$j-1]."</td>";
@@ -102,24 +141,6 @@
                                     
                                     echo "</tr>";
                                 }
-                            }
-                         } else{
-
-                            $filas = [1,2,3,4,5,6,7,8,9,10];
-                            $columnas = [1,2,3,4,5,6,7,8,9,10];
-                            $posiciones;
-                             
-                            echo $mensajeContrincante;
-                            for($j = 1; $j<=10;$j++){
-                                echo "<tr>";                        
-                                echo "<td>".$filas[$j-1]."</td>";
-                                for($i =1; $i<=10;$i++){
-                                    $posicion = $j.$i;
-                                    $id = $posicion."-".$_SESSION['idUsuario'];
-                                    echo "<td><button type='submit' disabled id='casillaAgua' name='casilla' value='$id'></button></td>";
-                                }
-                                
-                                echo "</tr>";
                             }
                         }
                          
