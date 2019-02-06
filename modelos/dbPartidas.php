@@ -125,8 +125,6 @@ public function borrarPartidaDB($idPartida){
   
 }
 
-
-
 public function partidasEnCursoDB($id){
 
     $conexion = mysqli_connect("localhost","root","","hundirlaflota");
@@ -164,7 +162,6 @@ public function partidasEnCursoDB($id){
          return $datos;
      }
 }
-
 
 public function crearTablerosDB($idPartida){
 
@@ -223,7 +220,7 @@ public function devolverTablerosDB($idPartida){
         
         if(mysqli_num_rows($queryTableroHost)>0){
             while($results = mysqli_fetch_array($queryTableroHost)){
-                $tableroHostArray[] = [$results[0],$results[1],$results[2],$results[3],$results[4]];
+                $tableroHostArray[] = [$results[0],$results[1],$results[2],$results[3],$results[4],$results[5]];
             }
         } else{
             $tableroHostArray = false;
@@ -235,7 +232,7 @@ public function devolverTablerosDB($idPartida){
 
         if(mysqli_num_rows($queryTableroContrincante)>0){
             while($results = mysqli_fetch_array($queryTableroContrincante)){
-                $tableroContrincanteArray[] = [$results[0],$results[1],$results[2],$results[3],$results[4]];
+                $tableroContrincanteArray[] = [$results[0],$results[1],$results[2],$results[3],$results[4],$results[5]];
             }
         } else{
             $tableroContrincanteArray = false;
@@ -286,15 +283,32 @@ public function introducirBarco($longitud,$direccion,$letra,$numero,$idUsuario,$
 
     $consultaTablero = "select idTablero from tableros where IDJugador=$idUsuario and idPartida = $idPartida";
     $tablero = mysqli_fetch_array(mysqli_query($conexion,$consultaTablero))[0];
-
+    echo $letra;
+    echo $numero;
     switch($direccion){
         case "vertical":    $posicion = array_search($letra,$filas);
                             $insertarBarcos = "insert into casillas (Letra,Numero,IDTablero,IDEstadoCasilla,IDTipoBarco) values";
                             for($i = $posicion; $i<$posicion+$longitud;$i++){
+                                if($i>9){
+                                    return false;
+                                }
                                 $insertarBarcos .= "($filas[$i],$numero,$tablero,2,'$tipoBarco'),";
                             }
                             $insertarBarcos = substr($insertarBarcos,0,strlen($insertarBarcos)-1);
                             mysqli_query($conexion,$insertarBarcos) or die("problemas amigo;".mysqli_error($conexion));
+                            break;
+        case "horizontal": $posicion = array_search($numero,$filas);
+                            $insertarBarcos = "insert into casillas (Letra,Numero,IDTablero,IDEstadoCasilla,IDTipoBarco) values";
+                            for($i = $posicion; $i<$posicion+$longitud;$i++){
+                                if($i>9){
+                                    return false;
+                                }
+                                $insertarBarcos .= "($letra,$filas[$i],$tablero,2,'$tipoBarco'),";
+                            }
+                            $insertarBarcos = substr($insertarBarcos,0,strlen($insertarBarcos)-1);
+                            echo $insertarBarcos;
+                            mysqli_query($conexion,$insertarBarcos) or die("problemas amigo;".mysqli_error($conexion));
+                            break;
 
 
     }
@@ -357,6 +371,42 @@ public function cambiarEstadoPartida($idPartida,$nuevoEstado){
     }
     
 }
+
+public function atacarCasilla($letra,$numero,$idUsuario,$idPartida){
+    $conexion = mysqli_connect("localhost","root","","hundirlaflota");
+
+    
+    $consultaTablero = "select idTablero from tableros where IDJugador!=$idUsuario and idPartida = $idPartida";
+    $tablero = mysqli_fetch_array(mysqli_query($conexion,$consultaTablero))[0];
+
+    $updateFila = "update casillas set idtipoBarco='barcoTocado' where letra=$letra and numero = $numero and idTablero = $tablero";
+
+    $comprobarPosicion = "select * from casillas where letra=$letra and numero=$numero and idTablero = $tablero";
+
+    if(mysqli_num_rows(mysqli_query($conexion,$comprobarPosicion))>0){
+
+        if(mysqli_query($conexion,$updateFila) or die("Problemas con la modificacion de casilla.".mysqli_error($conexion))){
+            mysqli_close($conexion);
+            return true;
+        } 
+    
+    } else{
+        $insertarAgua = "insert into casillas(Letra,Numero,IDTablero,IDEstadoCasilla,idTipoBarco) values($letra,$numero,$tablero,2,'aguaTocada')";
+        if(mysqli_query($conexion,$insertarAgua) or die("Problemas con la insercion de agua.".mysqli_error($conexion))){
+            mysqli_close($conexion);
+            return false;
+        } 
+       
+    }
+
+    
+
+    
+}
+
+
+
+
 
 }
 

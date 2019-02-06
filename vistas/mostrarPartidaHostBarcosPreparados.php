@@ -25,10 +25,7 @@
 </head>
 
 <body>
-        <?php
-        $url=$_SERVER['REQUEST_URI'];
-        header("Refresh: 4; URL=$url");
-        ?>
+      
 
     <div class="container row center-align " style="width:500px;" id="formulario">
         <img class="responsive-img col s12" style="text-align:center" src="./img/logo.png">
@@ -64,7 +61,7 @@
                            if($tableros[0]!=false){
 
                             for($i = 0;$i<count($tableros[0]);$i++){
-                                $posiciones[] = $tableros[0][$i][1]."".$tableros[0][$i][2];
+                                $posiciones[] = $tableros[0][$i][1]."-".$tableros[0][$i][2];
                             }
                             
                                 //EL HOST ESTÁ PRIMERO
@@ -74,7 +71,7 @@
                                     echo "<tr>";                        
                                     echo "<td>".$filas[$j-1]."</td>";
                                     for($i =1; $i<=10;$i++){
-                                        $posicion = $j.$i;
+                                        $posicion = $j."-".$i;
                                         
                                         if(in_array($posicion,$posiciones) != false){
                                             
@@ -100,7 +97,7 @@
                             if($tableros[1]!=false){
 
                                 for($i = 0;$i<count($tableros[1]);$i++){
-                                    $posiciones[] = $tableros[1][$i][1]."".$tableros[1][$i][2];
+                                    $posiciones[] = $tableros[1][$i][1]."-".$tableros[1][$i][2];
                                 }
                                 
                                     //EL HOST ESTÁ PRIMERO
@@ -110,7 +107,7 @@
                                         echo "<tr>";                        
                                         echo "<td>".$filas[$j-1]."</td>";
                                         for($i =1; $i<=10;$i++){
-                                            $posicion = $j.$i;
+                                            $posicion = $j."-".$i;
                                             
                                             if(in_array($posicion,$posiciones) != false){
                                                 
@@ -134,7 +131,7 @@
                                     echo "<tr>";                        
                                     echo "<td>".$filas[$j-1]."</td>";
                                     for($i =1; $i<=10;$i++){
-                                        $posicion = $j.$i;
+                                        $posicion = $j."-".$i;
                                         $id = $posicion."-".$_SESSION['idUsuario'];
                                         echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                     }
@@ -148,6 +145,10 @@
                          ?>
 
                 </table>
+                <button type="submit" class=" waves-effect waves-light btn col s6" name="horizontal" value="horizontal">Horizontal</button>
+                    
+                    <button type="submit" class=" waves-effect waves-light btn col s6" name="vertical" value="vertical">Vertical</button>
+    
             </div>
 
             <div class="col s6 right blue lighten-4 ">
@@ -171,7 +172,7 @@
                                     echo "<tr>";                        
                                     echo "<td>".$filas[$j-1]."</td>";
                                     for($i =1; $i<=10;$i++){
-                                        $posicion = $j.$i;
+                                        $posicion = $j."-".$i;
                                         $id = $posicion."-".$_SESSION['idUsuario'];
                                         echo "<td><button type='submit' disabled id='casillaAgua' name='casilla' value='$id'></button></td>";
                                     }
@@ -184,7 +185,7 @@
                 </table>
             </div>
 
-            <button type="submit" class=" waves-effect waves-light btn col s12" name="volverAlMenu" value="volverAlMenu">Volver
+            <button type="submit" style="margin-top:15px;" class=" waves-effect waves-light btn col s12" name="volverAlMenu" value="volverAlMenu">Volver
         al menú<i class="large material-icons right">arrow_back</i></button>
     
         </form>

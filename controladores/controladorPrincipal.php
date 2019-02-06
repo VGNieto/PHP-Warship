@@ -83,9 +83,17 @@ public function controlarOpcion(){
                         break;
             case 'partida': 
                         if(isset($_REQUEST['volverAlMenu'])){
+                            
                             $menuPrincipal->mostrarMenu();
+
                         } else if(isset($_REQUEST['casilla'])){
                             $partida->handlerCasilla($_REQUEST['casilla'],$_REQUEST['idPartida']);
+                        } else if(isset($_REQUEST['horizontal'])){
+                            $_SESSION['direccion'] = "horizontal";
+                            $partida->mostrarPartida($_REQUEST['idPartida']);
+                        } else if(isset($_REQUEST['vertical'])){
+                            $_SESSION['direccion'] = "vertical";
+                            $partida->mostrarPartida($_REQUEST['idPartida']);
                         }
                         break;
                            

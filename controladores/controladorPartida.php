@@ -11,18 +11,22 @@ public function __construct(){
 
 public function handlerCasilla($casilla,$idPartida){
 
+    $datos = explode('-',$casilla);
+    echo $casilla;
+    $letra = $datos[0];
+    $numero =$datos[1];
+    $idUsuario = $datos[2];
 
-    $letra = substr($casilla,0,1);
-    $numero = substr($casilla,1,1);
-    $idUsuario = substr($casilla,3,1);
-
+    if(isset($_SESSION['direccion'])){
+        $direccion = $_SESSION['direccion'];
+    }
     $estadoPartida = $this->devolverEstadoPartida($idPartida);
 
     switch($estadoPartida){
         case 1: switch($this->ultimoBarcoInsertado($idPartida,$_SESSION['idUsuario'])){
                     case "Portaviones": 
                                         if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                                            $this->introducirBarco(4,"vertical",$letra,$numero,$idUsuario,$idPartida,"Acorazado");
+                                            $this->introducirBarco(4,$direccion,$letra,$numero,$idUsuario,$idPartida,"Acorazado");
                                             $this->mostrarPartida($idPartida);
                                             
                                         } else{
@@ -31,21 +35,21 @@ public function handlerCasilla($casilla,$idPartida){
                                         break;
                                        
                     case "Acorazado": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                                        $this->introducirBarco(3,"vertical",$letra,$numero,$idUsuario,$idPartida,"Crucero1");
+                                        $this->introducirBarco(3,$direccion,$letra,$numero,$idUsuario,$idPartida,"Crucero1");
                                         $this->mostrarPartida($idPartida);
                                         } else{
                                             $this->mostrarPartida($idPartida);
                                         }
                                         break;
                     case "Crucero1": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                                        $this->introducirBarco(3,"vertical",$letra,$numero,$idUsuario,$idPartida,"Crucero2");
+                                        $this->introducirBarco(3,$direccion,$letra,$numero,$idUsuario,$idPartida,"Crucero2");
                                         $this->mostrarPartida($idPartida);
                                     } else{
                                         $this->mostrarPartida($idPartida);
                                     }
                                         break;
                     case "Crucero2": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                                            $this->introducirBarco(2,"vertical",$letra,$numero,$idUsuario,$idPartida,"Destructor1");
+                                            $this->introducirBarco(2,$direccion,$letra,$numero,$idUsuario,$idPartida,"Destructor1");
                                             $this->mostrarPartida($idPartida);
                                     } else{
                                         $this->mostrarPartida($idPartida);
@@ -53,7 +57,7 @@ public function handlerCasilla($casilla,$idPartida){
                                         break;
 
                     case "Destructor1": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                                         $this->introducirBarco(2,"vertical",$letra,$numero,$idUsuario,$idPartida,"Destructor2");
+                                         $this->introducirBarco(2,$direccion,$letra,$numero,$idUsuario,$idPartida,"Destructor2");
                                          $this->mostrarPartida($idPartida);
                                         }
                                         else{
@@ -61,7 +65,7 @@ public function handlerCasilla($casilla,$idPartida){
                                         }
                                             break;
                     case "Destructor2": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                                            $this->introducirBarco(2,"vertical",$letra,$numero,$idUsuario,$idPartida,"Destructor3");
+                                            $this->introducirBarco(2,$direccion,$letra,$numero,$idUsuario,$idPartida,"Destructor3");
                                             $this->mostrarPartida($idPartida);
                                         }else{
                                             $this->mostrarPartida($idPartida);
@@ -70,7 +74,7 @@ public function handlerCasilla($casilla,$idPartida){
                     case "Destructor3": $this->cambiarEstadoPartida($idPartida,2);
                                         $this->mostrarPartida($idPartida);
                                         break;
-                    case false: $this->introducirBarco(5,"vertical",$letra,$numero,$idUsuario,$idPartida,"Portaviones");
+                    case false: $this->introducirBarco(5,$direccion,$letra,$numero,$idUsuario,$idPartida,"Portaviones");
                                  $this->mostrarPartida($idPartida);
 
                                         break;
@@ -82,7 +86,7 @@ public function handlerCasilla($casilla,$idPartida){
         case 2: switch($this->ultimoBarcoInsertado($idPartida,$_SESSION['idUsuario'])){
                     case "Portaviones": 
                                         if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                                            $this->introducirBarco(4,"vertical",$letra,$numero,$idUsuario,$idPartida,"Acorazado");
+                                            $this->introducirBarco(4,$direccion,$letra,$numero,$idUsuario,$idPartida,"Acorazado");
                                             $this->mostrarPartida($idPartida);
                                             
                                         } else{
@@ -91,21 +95,21 @@ public function handlerCasilla($casilla,$idPartida){
                                         break;
                                        
                     case "Acorazado": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                                        $this->introducirBarco(3,"vertical",$letra,$numero,$idUsuario,$idPartida,"Crucero1");
+                                        $this->introducirBarco(3,$direccion,$letra,$numero,$idUsuario,$idPartida,"Crucero1");
                                         $this->mostrarPartida($idPartida);
                                         } else{
                                             $this->mostrarPartida($idPartida);
                                         }
                                         break;
                     case "Crucero1": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                                        $this->introducirBarco(3,"vertical",$letra,$numero,$idUsuario,$idPartida,"Crucero2");
+                                        $this->introducirBarco(3,$direccion,$letra,$numero,$idUsuario,$idPartida,"Crucero2");
                                         $this->mostrarPartida($idPartida);
                                     } else{
                                         $this->mostrarPartida($idPartida);
                                     }
                                         break;
                     case "Crucero2": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                                            $this->introducirBarco(2,"vertical",$letra,$numero,$idUsuario,$idPartida,"Destructor1");
+                                            $this->introducirBarco(2,$direccion,$letra,$numero,$idUsuario,$idPartida,"Destructor1");
                                             $this->mostrarPartida($idPartida);
                                     } else{
                                         $this->mostrarPartida($idPartida);
@@ -113,7 +117,7 @@ public function handlerCasilla($casilla,$idPartida){
                                         break;
 
                     case "Destructor1": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                                         $this->introducirBarco(2,"vertical",$letra,$numero,$idUsuario,$idPartida,"Destructor2");
+                                         $this->introducirBarco(2,$direccion,$letra,$numero,$idUsuario,$idPartida,"Destructor2");
                                          $this->mostrarPartida($idPartida);
                                         }
                                         else{
@@ -121,20 +125,29 @@ public function handlerCasilla($casilla,$idPartida){
                                         }
                                             break;
                     case "Destructor2": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                                            $this->introducirBarco(2,"vertical",$letra,$numero,$idUsuario,$idPartida,"Destructor3");
+                                            $this->introducirBarco(2,$direccion,$letra,$numero,$idUsuario,$idPartida,"Destructor3");
                                             $this->mostrarPartida($idPartida);
                                         }else{
                                             $this->mostrarPartida($idPartida);
                                         }
                                         break;
-                    case "Destructor3": //$this->cambiarEstadoPartida($idPartida,3);
+                    case "Destructor3": //$this->cambiarEstadoPartida($idPartida,4);
                                         $this->mostrarPartida($idPartida);
                                         break;
-                    case false: $this->introducirBarco(5,"vertical",$letra,$numero,$idUsuario,$idPartida,"Portaviones");
+                    case false: $this->introducirBarco(5,$direccion,$letra,$numero,$idUsuario,$idPartida,"Portaviones");
                                  $this->mostrarPartida($idPartida);
 
                                         break;
                 }
+                break;
+    case 4:     if($this->atacarCasilla($letra,$numero,$idUsuario,$idPartida)){
+                    $this->mostrarPartida($idPartida);
+                } else{
+                    //$this->cambiarEstadoPartida($idPartida,5);
+                    $this->mostrarPartida($idPartida);
+                }
+               
+                break;
 
     }
 }
@@ -188,6 +201,12 @@ public function mostrarPartida($idPartida){
                 }
                 $mensajeHost = "Espera a que el Contrincante coloque sus barcos.";
                 include "./vistas/mostrarPartidaHostBarcosPreparados.php";
+                break;
+
+        case 4: 
+                $mensaje = "Es tu turno. ¡Ataca a tu RIVAL!";
+                $mensajeContrincante = "Es el turno del RIVAL. ¡Espera que ataque!";
+                include "./vistas/mostrarAtacaHost.php";
                 break;
     }
 
