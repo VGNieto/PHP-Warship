@@ -131,7 +131,7 @@ public function handlerCasilla($casilla,$idPartida){
                                             $this->mostrarPartida($idPartida);
                                         }
                                         break;
-                    case "Destructor3": //$this->cambiarEstadoPartida($idPartida,4);
+                    case "Destructor3": $this->cambiarEstadoPartida($idPartida,4);
                                         $this->mostrarPartida($idPartida);
                                         break;
                     case false: $this->introducirBarco(5,$direccion,$letra,$numero,$idUsuario,$idPartida,"Portaviones");
@@ -143,7 +143,15 @@ public function handlerCasilla($casilla,$idPartida){
     case 4:     if($this->atacarCasilla($letra,$numero,$idUsuario,$idPartida)){
                     $this->mostrarPartida($idPartida);
                 } else{
-                    //$this->cambiarEstadoPartida($idPartida,5);
+                    $this->cambiarEstadoPartida($idPartida,5);
+                    $this->mostrarPartida($idPartida);
+                }
+               
+                break;
+    case 5:     if($this->atacarCasilla($letra,$numero,$idUsuario,$idPartida)){
+                    $this->mostrarPartida($idPartida);
+                } else{
+                    $this->cambiarEstadoPartida($idPartida,4);
                     $this->mostrarPartida($idPartida);
                 }
                
@@ -207,6 +215,11 @@ public function mostrarPartida($idPartida){
                 $mensaje = "Es tu turno. ¡Ataca a tu RIVAL!";
                 $mensajeContrincante = "Es el turno del RIVAL. ¡Espera que ataque!";
                 include "./vistas/mostrarAtacaHost.php";
+                break;
+        case 5: 
+                $mensaje = "Es tu turno. ¡Ataca a tu RIVAL!";
+                $mensajeContrincante = "Es el turno del RIVAL. ¡Espera que ataque!";
+                include "./vistas/mostrarAtacaContrincante.php";
                 break;
     }
 

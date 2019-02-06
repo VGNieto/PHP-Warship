@@ -85,7 +85,7 @@
 
                                 }
                             }
-                            echo $mensaje;
+                            echo $mensajeContrincante;
                             foreach($items as $fila=> $row) {
                                 echo('<tr>');
                                 $valor = $fila-1;
@@ -95,34 +95,34 @@
                                     switch($cell[1]){
                                                 
                                                 case "Portaviones":  $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button type='submit' disabled id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;               
                                                 case "Acorazado": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button type='submit' disabled id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 case "Crucero1": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button type='submit'disabled id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 case "Crucero2":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button type='submit' disabled id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;    
-                                                case "Destructor1":$id = $cell[0]."-".$_SESSION['idUsuario']; 
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                case "Destructor1":$id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                    echo "<td><button type='submit' disabled id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;    
                                                 case "Destructor2":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button type='submit' disabled id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;    
                                                 case "Destructor3":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button type='submit' disabled id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;    
                                                 case "aguaTocada": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' disabled id='casillaAguaTocada' name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button type='submit' disabled disabled id='casillaAguaTocada' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 case "barcoTocado": $id = $cell[0]."-".$_SESSION['idUsuario'];
                                                                     echo "<td><button type='submit' disabled id='casillaBarcoTocado' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 case 0: $id = $fila."-".$columna."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaAgua' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button type='submit' disabled id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 
                                             }
@@ -164,7 +164,7 @@
 
                                 }
                             }
-                            echo $mensajeContrincante;
+                            echo $mensaje;
                             foreach($items as $fila=> $row) {
                                 echo('<tr>');
                                 $valor = $fila-1;
@@ -174,34 +174,34 @@
                                     switch($cell[1]){
                                                 
                                                 case "Portaviones":  $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;               
                                                 case "Acorazado": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 case "Crucero1": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 case "Crucero2":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;    
                                                 case "Destructor1":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;    
                                                 case "Destructor2":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;    
                                                 case "Destructor3":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaBarco' name='casilla' value='$id'></button></td>";
                                                                     break;    
                                                 case "aguaTocada": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' disabled id='casillaAguaTocada' name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' disabled id='casillaAguaTocada' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 case "barcoTocado": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' disabled id='casillaBarcoTocado' name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' disabled id='casillaBarcoTocado' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 case 0: $id = $fila."-".$columna."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaAgua' disabled name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 
                                             }
@@ -268,6 +268,7 @@
                                 }
                             }
                             echo " <br>";
+
                             foreach($items as $fila=> $row) {
                                 echo('<tr>');
                                 $valor = $fila-1;
@@ -277,34 +278,34 @@
                                     switch($cell[1]){
                                                 
                                                 case "Portaviones":  $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                     break;               
                                                 case "Acorazado": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 case "Crucero1": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 case "Crucero2":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button  disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                     break;    
                                                 case "Destructor1":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button  disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                     break;    
                                                 case "Destructor2":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                     break;    
                                                 case "Destructor3":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                     break;    
                                                 case "aguaTocada": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' disabled id='casillaAguaTocada' name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button  type='submit' disabled id='casillaAguaTocada' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 case "barcoTocado": $id = $cell[0]."-".$_SESSION['idUsuario'];
                                                                     echo "<td><button type='submit' disabled id='casillaBarcoTocado' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 case 0: $id = $fila."-".$columna."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                    echo "<td><button type='submit' disabled id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                     break;   
                                                 
                                             }
@@ -358,25 +359,25 @@
                                         switch($cell[1]){
                                                     
                                                     case "Portaviones":  $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                        echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                        echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                         break;               
                                                     case "Acorazado": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                        echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                        echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                         break;   
                                                     case "Crucero1": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                        echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                        echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                         break;   
                                                     case "Crucero2":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                        echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                        echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                         break;    
                                                     case "Destructor1":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                        echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                        echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                         break;    
                                                     case "Destructor2":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                        echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                        echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                         break;    
                                                     case "Destructor3":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                        echo "<td><button disabled type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                        echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                         break;    
                                                     case "aguaTocada": $id = $cell[0]."-".$_SESSION['idUsuario'];
                                                                         echo "<td><button type='submit' disabled id='casillaAguaTocada' name='casilla' value='$id'></button></td>";
@@ -385,7 +386,7 @@
                                                                         echo "<td><button type='submit' disabled id='casillaBarcoTocado' name='casilla' value='$id'></button></td>";
                                                                         break;   
                                                     case 0: $id = $fila."-".$columna."-".$_SESSION['idUsuario'];
-                                                                        echo "<td><button type='submit' disabled id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                        echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
                                                                         break;   
                                                     
                                                 }
