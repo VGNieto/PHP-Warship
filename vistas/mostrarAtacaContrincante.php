@@ -27,7 +27,7 @@
 <body>
         <?php
         $url=$_SERVER['REQUEST_URI'];
-        header("Refresh: 4; URL=$url");
+        header("Refresh: 120; URL=$url");
         $numeros = [1,2,3,4,5,6,7,8,9,10];
         ?>
 
@@ -167,6 +167,8 @@
                                 }
                             }
                             echo "<p id='mensaje'> $mensaje </p>";
+                            echo "<p id='mensaje'> $barcosHundidos </p>";
+
                             foreach($items as $fila=> $row) {
                                 echo('<tr>');
                                 $valor = $fila-1;

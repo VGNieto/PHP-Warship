@@ -86,6 +86,8 @@
                                 }
                             }
                             echo "<p id='mensaje'> $mensaje </p>";
+                            echo "<p id='mensaje'> $barcosHundidos </p>";
+
                             foreach($items as $fila=> $row) {
                                 echo('<tr>');
                                 $valor = $fila-1;

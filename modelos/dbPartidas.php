@@ -208,6 +208,8 @@ public function devolverTablerosDB($idPartida){
     $conexion = mysqli_connect("localhost","root","","hundirlaflota");
     $tableros;
     $consultaTableros = "select IDTablero,IDJugador from tableros where IDPartida = $idPartida";
+    unset($queryTableros);
+    unset($tableros);
     $queryTableros = mysqli_query($conexion,$consultaTableros) or die("Problemas al devolver los tableros:".mysqli_error($conexion));
     
     if(mysqli_num_rows($queryTableros)==0){
@@ -437,6 +439,36 @@ public function comprobarGanador($idPartida){
     } 
 
     return false;
+
+}
+
+public function comprobarBarcosHundidos($idPartida,$idUsuario){
+
+    $conexion = mysqli_connect("localhost","root","","hundirlaflota");
+
+    $consultaTableros = "select idTablero from tableros where idPartida = $idPartida and idJugador != $idUsuario";
+    $queryTableros = mysqli_query($conexion,$consultaTableros) or die ("Problemas al encontrar los tableros:".mysqli_error($conexion));
+    
+    $devolverBarcos = "Barcos hundidos:-";
+    if(mysqli_num_rows($queryTableros)>0){
+       $tablero = mysqli_fetch_array($queryTableros)[0];
+       $barcos = ['Portaviones','Acorazado','Crucero1','Crucero2','Destructor1','Destructor2','Destructor3'];
+
+       for($i = 0; $i<count($barcos);$i++){
+
+        $consultaBarcos = "Select count(idTipoBarco) from casillas where idTipoBarco='$barcos[$i]' and idTablero=$tablero";
+        $query = mysqli_query($conexion,$consultaBarcos) or die("Problemas con los barcos hundidos;".mysqli_error($conexion));
+        if(mysqli_fetch_array($query)[0] == 0){
+            $devolverBarcos.=$barcos[$i]."-";
+        }
+       }
+
+
+        
+    } 
+
+return $devolverBarcos;
+
 
 }
 

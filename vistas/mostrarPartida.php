@@ -84,7 +84,7 @@
                                         if(in_array($posicion,$posiciones) != false){
                                             
                                             $id = $posicion."-".$_SESSION['idUsuario'];
-                                            echo "<td><button type='submit' id='casillaBarco' name='casilla' value='$id'></button></td>";
+                                            echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
                                         } else{
                                             $id = $posicion."-".$_SESSION['idUsuario'];
                                             echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";

@@ -25,6 +25,7 @@ public function handlerCasilla($casilla,$idPartida){
     if(isset($_SESSION['direccion'])){
         $direccion = $_SESSION['direccion'];
     }
+    unset($estadoPartida);
     $estadoPartida = $this->devolverEstadoPartida($idPartida);
 
     switch($estadoPartida){
@@ -71,13 +72,14 @@ public function handlerCasilla($casilla,$idPartida){
                                             break;
                     case "Destructor2": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
                                             $this->introducirBarco(2,$direccion,$letra,$numero,$idUsuario,$idPartida,"Destructor3");
-                                            $this->mostrarPartida($idPartida);
                                             $this->cambiarEstadoPartida($idPartida,2);
+                                            $this->mostrarPartida($idPartida);
+                                            
                                         }else{
                                             $this->mostrarPartida($idPartida);
                                         }
                                         break;
-                    case "Destructor3": $this->cambiarEstadoPartida($idPartida,2);
+                    case "Destructor3": 
                                         $this->mostrarPartida($idPartida);
                                         break;
                     case false: $this->introducirBarco(5,$direccion,$letra,$numero,$idUsuario,$idPartida,"Portaviones");
@@ -132,12 +134,13 @@ public function handlerCasilla($casilla,$idPartida){
                                             break;
                     case "Destructor2": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
                                             $this->introducirBarco(2,$direccion,$letra,$numero,$idUsuario,$idPartida,"Destructor3");
+                                            $this->cambiarEstadoPartida($idPartida,4);
                                             $this->mostrarPartida($idPartida);
                                         }else{
                                             $this->mostrarPartida($idPartida);
                                         }
                                         break;
-                    case "Destructor3": $this->cambiarEstadoPartida($idPartida,4);
+                    case "Destructor3": 
                                         $this->mostrarPartida($idPartida);
                                         break;
                     case false: $this->introducirBarco(5,$direccion,$letra,$numero,$idUsuario,$idPartida,"Portaviones");
@@ -178,14 +181,14 @@ public function handlerCasilla($casilla,$idPartida){
 }
 public function mostrarPartida($idPartida){
     
-    $tableros = $this->mostrarTableros($idPartida);
-    
-
-    
+    unset($tableros);
+    $tableros = $this->mostrarTableros($idPartida);    
     $usuario = $_SESSION['idUsuario'];
     $estado = $this->devolverEstadoPartida($idPartida);
     $host = $this->devolverHostPartida($idPartida);
     $_SESSION['partida'] = $idPartida;
+
+    
     switch($estado){
         case 1: $mensaje;
                  switch($this->ultimoBarcoInsertado($idPartida,$usuario)){
@@ -233,21 +236,26 @@ public function mostrarPartida($idPartida){
                 break;
 
         case 4: 
+                
+                //Comprobamos barco hundido
+                $barcosHundidos = $this->comprobarBarcosHundidos($idPartida,$_SESSION['idUsuario']);
                 $mensaje = "Es tu turno. ¡Ataca a tu RIVAL!";
                 $mensajeContrincante = "Es el turno del RIVAL. ¡Espera que ataque!";
                 include "./vistas/mostrarAtacaHost.php";
                 break;
         case 5: 
+               
+                $barcosHundidos = $this->comprobarBarcosHundidos($idPartida,$_SESSION['idUsuario']);
                 $mensaje = "Es tu turno. ¡Ataca a tu RIVAL!";
                 $mensajeContrincante = "Es el turno del RIVAL. ¡Espera que ataque!";
                 include "./vistas/mostrarAtacaContrincante.php";
                 break;
-        case 6: 
+        case 6:                 
                 $mensaje = "¡HA GANADO EL HOST DE LA PARTIDA!";
                 include "./vistas/mostrarGanador.php";
                 break;
         case 7: 
-                $mensaje = "'HA GANADO EL CONTRINCANTE DE LA PARTIDA!";
+                $mensaje = "¡HA GANADO EL CONTRINCANTE DE LA PARTIDA!";
                 include "./vistas/mostrarGanador.php";
                 break;
     }
