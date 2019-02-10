@@ -123,6 +123,9 @@
                                                 case "barcoTocado": $id = $cell[0]."-".$_SESSION['idUsuario'];
                                                                     echo "<td><button type='submit' disabled id='casillaBarcoTocado' name='casilla' value='$id'></button></td>";
                                                                     break;   
+                                                case "bloqueado": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                    echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                    break; 
                                                 case 0: $id = $fila."-".$columna."-".$_SESSION['idUsuario'];
                                                                     echo "<td><button type='submit' id='casillaAgua' disabled name='casilla' value='$id'></button></td>";
                                                                     break;   

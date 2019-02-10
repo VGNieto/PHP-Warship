@@ -17,7 +17,6 @@ public function handlerCasilla($casilla,$idPartida){
     
 
     $datos = explode('-',$casilla);
-    echo $casilla;
     $letra = $datos[0];
     $numero =$datos[1];
     $idUsuario = $datos[2];

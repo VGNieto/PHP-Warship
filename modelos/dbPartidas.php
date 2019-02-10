@@ -293,7 +293,19 @@ public function introducirBarco($longitud,$direccion,$letra,$numero,$idUsuario,$
     echo $letra;
     echo $numero;
     switch($direccion){
-        case "vertical":    $posicion = array_search($letra,$filas);
+        case "vertical":    $bloquear = $this->bloquearAdyacentes($longitud,$direccion,$letra,$numero,$idUsuario,$idPartida,$tipoBarco);
+
+                            $insertarBloqueos = "insert into casillas (Letra,Numero,IDTablero,IDEstadoCasilla,IDTipoBarco) values";
+                            for($i = 0; $i<count($bloquear);$i++){
+                                $fila = $bloquear[$i][0];
+                                $columna = $bloquear[$i][1];
+                                $insertarBloqueos .= "($fila,$columna,$tablero,2,'bloqueado'),";
+                            }
+                            $insertarBloqueos = substr($insertarBloqueos,0,strlen($insertarBloqueos)-1);
+                            mysqli_query($conexion,$insertarBloqueos) or die("problemas amigo;".mysqli_error($conexion));
+        
+        
+                            $posicion = array_search($letra,$filas);
                             $insertarBarcos = "insert into casillas (Letra,Numero,IDTablero,IDEstadoCasilla,IDTipoBarco) values";
                             for($i = $posicion; $i<$posicion+$longitud;$i++){
                                 if($i>9){
@@ -304,7 +316,18 @@ public function introducirBarco($longitud,$direccion,$letra,$numero,$idUsuario,$
                             $insertarBarcos = substr($insertarBarcos,0,strlen($insertarBarcos)-1);
                             mysqli_query($conexion,$insertarBarcos) or die("problemas amigo;".mysqli_error($conexion));
                             break;
-        case "horizontal": $posicion = array_search($numero,$filas);
+        case "horizontal":  $bloquear = $this->bloquearAdyacentes($longitud,$direccion,$letra,$numero,$idUsuario,$idPartida,$tipoBarco);
+
+                            $insertarBloqueos = "insert into casillas (Letra,Numero,IDTablero,IDEstadoCasilla,IDTipoBarco) values";
+                            for($i = 0; $i<count($bloquear);$i++){
+                                $fila = $bloquear[$i][0];
+                                $columna = $bloquear[$i][1];
+                                $insertarBloqueos .= "($fila,$columna,$tablero,2,'bloqueado'),";
+                            }
+                            $insertarBloqueos = substr($insertarBloqueos,0,strlen($insertarBloqueos)-1);
+                            mysqli_query($conexion,$insertarBloqueos) or die("problemas amigo;".mysqli_error($conexion));
+        
+                            $posicion = array_search($numero,$filas);
                             $insertarBarcos = "insert into casillas (Letra,Numero,IDTablero,IDEstadoCasilla,IDTipoBarco) values";
                             for($i = $posicion; $i<$posicion+$longitud;$i++){
                                 if($i>9){
@@ -313,8 +336,10 @@ public function introducirBarco($longitud,$direccion,$letra,$numero,$idUsuario,$
                                 $insertarBarcos .= "($letra,$filas[$i],$tablero,2,'$tipoBarco'),";
                             }
                             $insertarBarcos = substr($insertarBarcos,0,strlen($insertarBarcos)-1);
-                            echo $insertarBarcos;
                             mysqli_query($conexion,$insertarBarcos) or die("problemas amigo;".mysqli_error($conexion));
+
+                            
+
                             break;
 
 
@@ -387,15 +412,24 @@ public function atacarCasilla($letra,$numero,$idUsuario,$idPartida){
     $tablero = mysqli_fetch_array(mysqli_query($conexion,$consultaTablero))[0];
 
     $updateFila = "update casillas set idtipoBarco='barcoTocado' where letra=$letra and numero = $numero and idTablero = $tablero";
+    $updateBloqueado = "update casillas set idtipoBarco='aguaTocada' where letra=$letra and numero = $numero and idTablero = $tablero";
 
-    $comprobarPosicion = "select * from casillas where letra=$letra and numero=$numero and idTablero = $tablero";
+    $comprobarPosicion = "select idtipobarco from casillas where letra=$letra and numero=$numero and idTablero = $tablero";
 
-    if(mysqli_num_rows(mysqli_query($conexion,$comprobarPosicion))>0){
+    if($resultado = mysqli_fetch_array(mysqli_query($conexion,$comprobarPosicion))[0]){
 
-        if(mysqli_query($conexion,$updateFila) or die("Problemas con la modificacion de casilla.".mysqli_error($conexion))){
-            mysqli_close($conexion);
-            return true;
-        } 
+        if($resultado!= 'bloqueado'){
+            if(mysqli_query($conexion,$updateFila) or die("Problemas con la modificacion de casilla.".mysqli_error($conexion))){
+                mysqli_close($conexion);
+                return true;
+            } 
+        } else{
+            if(mysqli_query($conexion,$updateBloqueado) or die("Problemas con la insercion de agua.".mysqli_error($conexion))){
+                mysqli_close($conexion);
+                return false;
+            }
+        }
+        
     
     } else{
         $insertarAgua = "insert into casillas(Letra,Numero,IDTablero,IDEstadoCasilla,idTipoBarco) values($letra,$numero,$tablero,2,'aguaTocada')";
@@ -472,6 +506,84 @@ return $devolverBarcos;
 
 }
 
+public function bloquearAdyacentes($longitud,$direccion,$fila,$columna,$idUsuario,$idPartida,$tipoBarco){
+
+    $conexion = mysqli_connect("localhost","root","","hundirlaflota");
+
+    $consultaTableros = "select idTablero from tableros where idPartida = $idPartida and idJugador = $idUsuario";
+    $queryTableros = mysqli_query($conexion,$consultaTableros) or die ("Problemas al encontrar los tableros:".mysqli_error($conexion));
+    
+  
+    if(mysqli_num_rows($queryTableros)>0){
+       $tablero = mysqli_fetch_array($queryTableros)[0];
+       unset($posicionesBloqueadas);
+       $posicionesBloqueadas;
+       switch($direccion){
+           case "horizontal":   //Fila arriba
+                                if($fila>1){
+                                    for($i = $columna-1;$i<($longitud+$columna+1);$i++){
+                                        $posicionesBloqueadas[] = [$fila-1,$i];
+                                    }
+                                }
+                                //Fila abajo
+                                if($fila<10){
+                                    for($i = $columna-1;$i<($longitud+$columna+1);$i++){
+                                        $posicionesBloqueadas[] = [$fila+1,$i];
+                                    }
+                                }
+                                //Fila izquierda
+                                if($columna>1){
+                                   
+                                        $posicionesBloqueadas[] = [$fila,$columna-1];
+                                    
+                                }
+                                //Fila derecha
+                                if($columna<10){
+                                    
+                                        $posicionesBloqueadas[] = [$fila,$columna+$longitud];
+                                    
+                                }
+                                break;
+            case "vertical":   //Fila izquierda
+                                if($columna>1){
+                                    for($i = $fila-1;$i<($longitud+$fila+1);$i++){
+                                        $posicionesBloqueadas[] = [$i,$columna-1];
+                                    }
+                                }
+                                //Fila derecha
+                                if($columna<10){
+                                    for($i = $fila-1;$i<($longitud+$fila+1);$i++){
+                                        $posicionesBloqueadas[] = [$i,$columna+1];
+                                    }
+                                }
+                                //Fila arriba
+                                if($fila>1){
+                                   
+                                        $posicionesBloqueadas[] = [$fila-1,$columna];
+                                    
+                                }
+                                //Fila abajo
+                                if($fila<10){
+                                    
+                                        $posicionesBloqueadas[] = [$fila+$longitud,$columna];
+                                    
+                                }
+                                break;
+
+
+                                
+       }
+
+    } 
+
+    return $posicionesBloqueadas;
+
+}
+
+
+public function comprobarEspacio($longitud,$direccion,$fila,$columna,$idUsuario,$idPartida,$tipoBarco){
+
+
 
 
 
@@ -479,5 +591,5 @@ return $devolverBarcos;
 }
 
 
-
+}
 ?>
