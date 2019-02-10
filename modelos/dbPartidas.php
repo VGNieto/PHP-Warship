@@ -15,7 +15,7 @@ public function crearPartidaDB($host,$nombre,$contraseña){
 
         $conexion = mysqli_connect("localhost","root","","hundirlaflota");
     
-        $insertar = "insert into partidas(IDHost,IDEstadoPartida,passwordPartida,nombrePartida) values('$host',1,'$contraseña','$nombre')";
+        $insertar = "insert into partidas(IDHost,IDEstadoPartida,passwordPartida,nombrePartida) values('$host',8,'$contraseña','$nombre')";
     
         mysqli_query($conexion,$insertar) or die("Problemas al añadir una partida: " .mysqli_error($conexion));
     
@@ -87,9 +87,10 @@ public function unirseAPartidaDB($idPartida,$idContrincante){
         $estado = $results[2];
         $host = $results[1];
      }
-    if($estado == 1 &&  $host!=$idContrincante || $estado == 2 && $host!=$idContrincante){
+    if($estado == 8 &&  $host!=$idContrincante){
         $queryUnirse = "update partidas set IDContrincante = $idContrincante where IDPartida = $idPartida";
         mysqli_query($conexion,$queryUnirse) or die("Problemas al modificar una partida: " .mysqli_error($conexion));
+        
         mysqli_close($conexion);
         return true;
     } else{
@@ -208,6 +209,10 @@ public function devolverTablerosDB($idPartida){
     $tableros;
     $consultaTableros = "select IDTablero,IDJugador from tableros where IDPartida = $idPartida";
     $queryTableros = mysqli_query($conexion,$consultaTableros) or die("Problemas al devolver los tableros:".mysqli_error($conexion));
+    
+    if(mysqli_num_rows($queryTableros)==0){
+        return false;
+    }
     while($results = mysqli_fetch_array($queryTableros)){
         $tableros[] = $results[0];
         $jugadores[] = $results[1];
@@ -325,7 +330,7 @@ public function ultimoBarcoInsertado($idPartida,$idUsuario){
 
     $consultaUltimoBarco = "select IDtipoBarco from casillas  where IDTablero = $tablero order by IDCasilla desc limit 1";
     $queryUltimoBarco = mysqli_query($conexion,$consultaUltimoBarco) or die("Problemas con el ultimo barco:".mysqli_error($conexion));
-
+    
     if(mysqli_num_rows($queryUltimoBarco)>0){
         $ultimoBarco = mysqli_fetch_array($queryUltimoBarco)[0];
         mysqli_close($conexion);
@@ -402,6 +407,37 @@ public function atacarCasilla($letra,$numero,$idUsuario,$idPartida){
     
 
     
+}
+
+public function comprobarGanador($idPartida){
+    $conexion = mysqli_connect("localhost","root","","hundirlaflota");
+
+    $consultaTableros = "select idTablero from tableros where idPartida = $idPartida";
+    $queryTableros = mysqli_query($conexion,$consultaTableros) or die ("Problemas al encontrar los tableros:".mysqli_error($conexion));
+    
+
+    if(mysqli_num_rows($queryTableros)>0){
+       while($results = mysqli_fetch_array($queryTableros)){
+           $tableros[] = $results[0];
+       }
+
+
+        for($i=0;$i<2;$i++){
+            $queryGanador = "select count(idTipoBarco) from casillas where idTablero=$tableros[$i] and idTipoBarco='barcoTocado'";
+            $ganador = mysqli_query($conexion,$queryGanador) or die("Problemas con el ganador;".mysqli_error($conexion));
+            if(mysqli_num_rows($ganador)>0){
+                $hundidos = mysqli_fetch_array($ganador)[0];
+
+                if($hundidos == 21){
+                    return $tableros[$i];
+                }
+            }
+
+        }
+    } 
+
+    return false;
+
 }
 
 

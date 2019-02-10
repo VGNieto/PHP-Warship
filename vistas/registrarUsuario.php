@@ -26,30 +26,30 @@
         <form action="index.php" method="post">
 
             <img class="responsive-img" style="text-align:center" src="./img/logo.png">
-            <div id="menu" class="z-depth-5 teal blue">
+            <div id="menu" class="z-depth-5 white">
                 <input type="hidden" name="op" value="login">
                 <div class="input-field col s6">
-                    <i class="material-icons prefix white-text">account_circle</i>
+                    <i class="material-icons prefix black-text">account_circle</i>
                     <input type="text" id="icon_prefix" name="registroUsuario" class="input-field validate" value="">
-                    <label for="icon_prefix" class="white-text">Nuevo Usuario</label>
+                    <label for="icon_prefix" class="black-text">Nuevo Usuario</label>
                 </div>
                 <div class="input-field col s6">
-                    <i class="material-icons prefix white-text">lock </i>
+                    <i class="material-icons prefix black-text">lock </i>
                     <input type="text" id="icon_prefix2" name="registroContraseña" class="input-field" value="">
-                    <label for="icon_prefix2" class="white-text">Nueva contraseña</label>
+                    <label for="icon_prefix2" class="black-text">Nueva contraseña</label>
                 </div>
             </div>
-            <button type="submit" class=" waves-effect waves-light btn" name="registrarUsuario"
+            <button type="submit" class=" waves-effect waves-light btn red darken-1" name="registrarUsuario"
                 value="Registrarse">Registrar Usuario <i class="large material-icons right">contacts</i></button>
-            <button type="submit" class=" waves-effect waves-light btn" name="loginAgain"
-                value="Iniciar Sesión">Volver<i class="material-icons right">arrow_back</i></button>
+            <button type="submit" class=" waves-effect waves-light btn white black-text" name="loginAgain"
+                value="Iniciar Sesión">Volver<i class="material-icons">arrow_back</i></button>
 
             <?php
               
                 if($registrado == true && isset($_REQUEST['registrarUsuario'])){
-                    echo "<p class='flow-text' style='font-size:20px'>Registrado correctamente amigo.</p>";
+                    echo "<p class='flow-text white-text' style='font-size:20px'>Usuario registrado correctamente.</p>";
                 } else if($registrado == false && isset($_REQUEST['registrarUsuario'])){
-                    echo "<p class='flow-text' style='font-size:20px'>No ha podido ser amigo.</p>";
+                    echo "<p class='flow-text white-text' style='font-size:20px'>El usuario ya existe.</p>";
 
                 }
 

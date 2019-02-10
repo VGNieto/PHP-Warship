@@ -5,8 +5,6 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Usuarios</title>
-    <meta http-equiv="refresh" content="10">
-
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -39,9 +37,9 @@
                 echo "<input type='hidden' name='idPartida' value=$idPartida>";
             ?>
             
-            <div class="col s6 left blue lighten-4 ">
-                <h5 style="font-family:Courier New, Courier, monospace;" class="center-align">TU TABLERO</h5>
-                <table class="centered responsive-table">
+            <div class="col col s12 m12 l6 xl6 left white  ">
+            <h5 class="center-align" id="titulo">TU TABLERO</h5>
+            <table class="centered responsive-table">
                     <thead>
                         <tr>
                             <th> </th><th>A</th> <th>B</th> <th>C</th><th>D</th> <th>E</th><th>F</th><th>G</th> <th>H</th><th>I</th><th>J</th>
@@ -66,7 +64,7 @@
                             
                                 //EL HOST ESTÁ PRIMERO
                                 
-                                echo $mensajeHost;
+                                echo "<p id='mensaje'> $mensajeHost </p>";
                                 for($j = 1; $j<=10;$j++){
                                     echo "<tr>";                        
                                     echo "<td>".$filas[$j-1]."</td>";
@@ -93,7 +91,9 @@
                             $filas = [1,2,3,4,5,6,7,8,9,10];
                             $columnas = [1,2,3,4,5,6,7,8,9,10];
                             $posiciones;
-                                
+                            echo "<button type='submit' class=' waves-effect waves-light btn col s6 orange darken-3' name='horizontal' value='horizontal'>Horizontal</button>
+                    
+                            <button type='submit' class=' waves-effect waves-light btn col s6 green accent-3' name='vertical' value='vertical'>Vertical</button>";
                             if($tableros[1]!=false){
 
                                 for($i = 0;$i<count($tableros[1]);$i++){
@@ -102,7 +102,8 @@
                                 
                                     //EL HOST ESTÁ PRIMERO
                                     
-                                    echo $mensaje;
+                                    echo "<p id='mensaje'> $mensaje </p>";
+
                                     for($j = 1; $j<=10;$j++){
                                         echo "<tr>";                        
                                         echo "<td>".$filas[$j-1]."</td>";
@@ -126,7 +127,8 @@
                                 $filas = [1,2,3,4,5,6,7,8,9,10];
                                 $columnas = [1,2,3,4,5,6,7,8,9,10];
                                 $posiciones;
-                                    echo $mensaje;
+                                echo "<p id='mensaje'> $mensaje </p>";
+
                                 for($j = 1; $j<=10;$j++){
                                     echo "<tr>";                        
                                     echo "<td>".$filas[$j-1]."</td>";
@@ -145,15 +147,12 @@
                          ?>
 
                 </table>
-                <button type="submit" class=" waves-effect waves-light btn col s6" name="horizontal" value="horizontal">Horizontal</button>
-                    
-                    <button type="submit" class=" waves-effect waves-light btn col s6" name="vertical" value="vertical">Vertical</button>
-    
+              
             </div>
 
-            <div class="col s6 right blue lighten-4 ">
-                <h5 style="font-family:Courier New, Courier, monospace;" class="center-align">TABLERO RIVAL</h5>
-                <table class="centered responsive-table">
+            <div class="col s12 m12 l6 xl6 right white  ">
+            <h5 class="center-align" id="titulo">TABLERO RIVAL</h5>                
+            <table class="centered responsive-table">
                     <thead>
                         <tr>
                             <th> </th><th>A</th> <th>B</th> <th>C</th><th>D</th> <th>E</th><th>F</th><th>G</th> <th>H</th><th>I</th><th>J</th>
@@ -185,7 +184,7 @@
                 </table>
             </div>
 
-            <button type="submit" style="margin-top:15px;" class=" waves-effect waves-light btn col s12" name="volverAlMenu" value="volverAlMenu">Volver
+            <button type="submit" style="margin-top:15px;" class=" waves-effect waves-light btn col s12 red white-text" name="volverAlMenu" value="volverAlMenu">Volver
         al menú<i class="large material-icons right">arrow_back</i></button>
     
         </form>

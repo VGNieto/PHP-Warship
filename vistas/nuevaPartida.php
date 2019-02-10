@@ -27,22 +27,22 @@
 
             <img class="responsive-img" style="text-align:center" src="./img/logo.png">
             <input type="hidden" name="op" value="menuPrincipal">
-            <div id="menu" class="z-depth-5 teal blue">
+            <div id="menu" class="z-depth-5 white">
                 <div class="input-field col s6">
-                    <i class="material-icons prefix white-text">videogame_asset</i>
+                    <i class="material-icons prefix black-text">videogame_asset</i>
                     <input type="text" id="icon_prefix" name="nombrePartida" class="input-field validate" value="">
-                    <label for="icon_prefix" class="white-text">Nombre de la Partida</label>
+                    <label for="icon_prefix" class="black-text">Nombre de la Partida</label>
                 </div>
                 <div class="input-field col s6">
-                    <i class="material-icons prefix white-text">lock </i>
+                    <i class="material-icons prefix black-text">lock </i>
                     <input type="text" id="icon_prefix2" name="contraseñaPartida" class="input-field white-text"
                         value="">
-                    <label for="icon_prefix2" class="white-text">Contraseña (opcional)</label>
+                    <label for="icon_prefix2" class="black-text">Contraseña (opcional)</label>
                 </div>
             </div>
-            <button type="submit" class=" waves-effect waves-light btn" name="crearPartida" value="crearPartida">Crear
+            <button type="submit" class=" waves-effect waves-light btn red darken-1" name="crearPartida" value="crearPartida">Crear
                 Partida <i class="material-icons right">create</i></button>
-            <button type="submit" class=" waves-effect waves-light btn" name="volverAlMenu" value="volverAlMenu">Volver
+            <button type="submit" class=" waves-effect waves-light btn white black-text" name="volverAlMenu" value="volverAlMenu">Volver
                 al menú<i class="large material-icons right">arrow_back</i></button>
 
 

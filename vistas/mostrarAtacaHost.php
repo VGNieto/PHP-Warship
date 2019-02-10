@@ -27,14 +27,14 @@
 <body>
         <?php
         $url=$_SERVER['REQUEST_URI'];
-        header("Refresh: 4; URL=$url");
+        header("Refresh: 120; URL=$url");
         $numeros = [1,2,3,4,5,6,7,8,9,10];
         ?>
-
-    <div class="container row center-align " style="width:500px;" id="formulario">
+    <div class="container row center-align " style="width:500px;" id="formulario">  
+        <img class="responsive-img col s12" style="text-align:center" src="./img/logo.png">
 
     </div>
-
+    
     <div class="container row">
         <form action="index.php" method="post">
             <input type="hidden" name="op" value="partida">
@@ -42,9 +42,9 @@
                 echo "<input type='hidden' name='idPartida' value=$idPartida>";
             ?>
             
-            <div class="col s6 left blue lighten-4 ">
-                <h5 style="font-family:Courier New, Courier, monospace;" class="center-align">TU TABLERO</h5>
-                <table class="centered responsive-table">
+            <div class="col s12 m12 l6 xl6 left white ">
+            <h5 class="center-align" id="titulo">TU TABLERO</h5>
+                <table class="centered responsive-table" id="izquierda">
                     <thead>
                         <tr>
                             <th> </th><th>A</th> <th>B</th> <th>C</th><th>D</th> <th>E</th><th>F</th><th>G</th> <th>H</th><th>I</th><th>J</th>
@@ -75,7 +75,7 @@
                                 
                                 for($z=1;$z<=10;$z++){
                                     $busqueda = $i."-".$z;
-                                    if($valor =  array_search($busqueda,$posiciones)){
+                                    if(($valor =  array_search($busqueda,$posiciones)) !== false){
                                         $items[$i][$z] = [$posiciones[$valor],$estados[$valor]];
 
                                     } else{
@@ -85,7 +85,7 @@
 
                                 }
                             }
-                            echo $mensaje;
+                            echo "<p id='mensaje'> $mensaje </p>";
                             foreach($items as $fila=> $row) {
                                 echo('<tr>');
                                 $valor = $fila-1;
@@ -154,7 +154,7 @@
                                 
                                 for($z=1;$z<=10;$z++){
                                     $busqueda = $i."-".$z;
-                                    if($valor =  array_search($busqueda,$posiciones)){
+                                    if(($valor =  array_search($busqueda,$posiciones)) !== false){
                                         $items[$i][$z] = [$posiciones[$valor],$estados[$valor]];
 
                                     } else{
@@ -164,7 +164,7 @@
 
                                 }
                             }
-                            echo $mensajeContrincante;
+                            echo "<p id='mensaje'> $mensajeContrincante </p>";
                             foreach($items as $fila=> $row) {
                                 echo('<tr>');
                                 $valor = $fila-1;
@@ -215,15 +215,13 @@
                          ?>
 
                 </table>
-                    <button type="submit" class=" waves-effect waves-light btn col s6" name="horizontal" value="horizontal">Horizontal</button>
-                    
-                    <button type="submit" class=" waves-effect waves-light btn col s6" name="vertical" value="vertical">Vertical</button>
-    
+                  
             </div>
 
-            <div class="col s6 right blue lighten-4 ">
-                <h5 style="font-family:Courier New, Courier, monospace;" class="center-align">TABLERO RIVAL</h5>
-                <table class="centered responsive-table">
+            <div class="col s12 m12 l6 xl6 right white ">
+            <h5 class="center-align" id="titulo">TABLERO RIVAL</h5>
+
+                <table class="centered responsive-table" id="derecha">
                     <thead>
                         <tr>
                             <th> </th><th>A</th> <th>B</th> <th>C</th><th>D</th> <th>E</th><th>F</th><th>G</th> <th>H</th><th>I</th><th>J</th>
@@ -257,7 +255,7 @@
                                 
                                 for($z=1;$z<=10;$z++){
                                     $busqueda = $i."-".$z;
-                                    if($valor =  array_search($busqueda,$posiciones)){
+                                    if(($valor =  array_search($busqueda,$posiciones)) !== false){
                                         $items[$i][$z] = [$posiciones[$valor],$estados[$valor]];
 
                                     } else{
@@ -337,7 +335,7 @@
                                     
                                     for($z=1;$z<=10;$z++){
                                         $busqueda = $i."-".$z;
-                                        if($valor =  array_search($busqueda,$posiciones)){
+                                        if(($valor =  array_search($busqueda,$posiciones)) !== false){
                                             $items[$i][$z] = [$posiciones[$valor],$estados[$valor]];
 
                                         } else{
@@ -399,7 +397,7 @@
                 </table>
             </div>
             <br> 
-            <button type="submit" style="margin-top:15px;" class=" waves-effect waves-light btn col s12" name="volverAlMenu" value="volverAlMenu">Volver
+            <button type="submit" style="margin-top:15px;" class=" waves-effect waves-light btn col s12 red white-text" name="volverAlMenu" value="volverAlMenu">Volver
                 al menú<i class="large material-icons right">arrow_back</i></button>
             </form>
            

@@ -9,7 +9,12 @@ public function __construct(){
    
 }
 
+public function unirseAPartida($idPartida,$idUsuario){
+    return $this->unirseAPartidaDB($idPartida,$idUsuario);
+}
 public function handlerCasilla($casilla,$idPartida){
+
+    
 
     $datos = explode('-',$casilla);
     echo $casilla;
@@ -67,6 +72,7 @@ public function handlerCasilla($casilla,$idPartida){
                     case "Destructor2": if($this->comprobarCasilla($letra,$numero,$idUsuario,$idPartida)){
                                             $this->introducirBarco(2,$direccion,$letra,$numero,$idUsuario,$idPartida,"Destructor3");
                                             $this->mostrarPartida($idPartida);
+                                            $this->cambiarEstadoPartida($idPartida,2);
                                         }else{
                                             $this->mostrarPartida($idPartida);
                                         }
@@ -141,7 +147,13 @@ public function handlerCasilla($casilla,$idPartida){
                 }
                 break;
     case 4:     if($this->atacarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                    $this->mostrarPartida($idPartida);
+                    if(($ganador=$this->comprobarGanador($idPartida))!==false){
+                        $this->cambiarEstadoPartida($idPartida,6);
+                        $this->mostrarPartida($idPartida);
+                    } else{
+                        $this->mostrarPartida($idPartida);
+                    }
+                    
                 } else{
                     $this->cambiarEstadoPartida($idPartida,5);
                     $this->mostrarPartida($idPartida);
@@ -149,7 +161,12 @@ public function handlerCasilla($casilla,$idPartida){
                
                 break;
     case 5:     if($this->atacarCasilla($letra,$numero,$idUsuario,$idPartida)){
-                    $this->mostrarPartida($idPartida);
+                    if(($ganador=$this->comprobarGanador($idPartida))!==false){
+                        $this->cambiarEstadoPartida($idPartida,7);
+                        $this->mostrarPartida($idPartida);
+                    } else{
+                        $this->mostrarPartida($idPartida);
+                    }
                 } else{
                     $this->cambiarEstadoPartida($idPartida,4);
                     $this->mostrarPartida($idPartida);
@@ -160,7 +177,11 @@ public function handlerCasilla($casilla,$idPartida){
     }
 }
 public function mostrarPartida($idPartida){
+    
     $tableros = $this->mostrarTableros($idPartida);
+    
+
+    
     $usuario = $_SESSION['idUsuario'];
     $estado = $this->devolverEstadoPartida($idPartida);
     $host = $this->devolverHostPartida($idPartida);
@@ -221,9 +242,17 @@ public function mostrarPartida($idPartida){
                 $mensajeContrincante = "Es el turno del RIVAL. ¡Espera que ataque!";
                 include "./vistas/mostrarAtacaContrincante.php";
                 break;
+        case 6: 
+                $mensaje = "¡HA GANADO EL HOST DE LA PARTIDA!";
+                include "./vistas/mostrarGanador.php";
+                break;
+        case 7: 
+                $mensaje = "'HA GANADO EL CONTRINCANTE DE LA PARTIDA!";
+                include "./vistas/mostrarGanador.php";
+                break;
     }
 
-
+    
     
 
 }
@@ -240,6 +269,8 @@ public function crearTableros($idPartida){
         $this->mostrarPartida($idPartida);
     };
 }
+
+
 
 
 

@@ -50,6 +50,10 @@ public function unirseAPartida($idPartida,$idContrincante){
     return $this->unirseAPartidaDB($idPartida,$idContrincante);
 }
 
+public function cambiarEstado($idPartida,$nuevoEstado){
+    return $this->cambiarEstadoPartida($idPartida,$nuevoEstado);
+}
+
 public function crearPartida($host,$nombre,$contraseña){
     return $this->crearPartidaDB($host,$nombre,$contraseña);
 }

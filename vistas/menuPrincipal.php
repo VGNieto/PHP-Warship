@@ -28,20 +28,20 @@
     <div class="container center-align " style="width:500px;" id="formulario">
         <form action="index.php" method="post">
             <img class="responsive-img" style="text-align:center" src="./img/logo.png">
-            <div id="menu" class="z-depth-5 teal blue">
-                <h4 class="center-align white-text" style="font-family: Impact, Charcoal, sans-serif">Menú principal
+            <div id="menu" class="z-depth-5 white">
+                <h4 class="center-align red-text" style="font-family: Impact, Charcoal, sans-serif">Menú principal
                 </h4>
 
                 <input type="hidden" name="op" value="menuPrincipal">
-                <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="nuevaPartida"
+                <button type="submit" class=" waves-effect waves-light btn red darken-1" style="width:100%;" name="nuevaPartida"
                     value="Nueva Partida">Nueva Partida <i class="material-icons right">fiber_new</i></button><br><br>
-                <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="listaPartidas"
+                <button type="submit" class=" waves-effect waves-light btn red darken-1" style="width:100%;" name="listaPartidas"
                     value="Lista Partidas">Lista de Partidas<i
                         class="material-icons right">format_list_bulleted</i></button><br><br>
-                <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="partidasEnCurso"
+                <button type="submit" class=" waves-effect waves-light btn red darken-1" style="width:100%;" name="partidasEnCurso"
                     value="Partidas en Curso">Partidas en Curso <i
                         class="material-icons right">format_list_bulleted</i></button><br><br>
-                <button type="submit" class=" waves-effect waves-light btn" style="width:100%;" name="Salir"
+                <button type="submit" class=" waves-effect waves-light btn red darken-1" style="width:100%;" name="Salir"
                     value="Salir">Salir <i class="material-icons right">cancel</i></button><br><br>
 
             </div>

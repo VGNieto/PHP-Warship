@@ -56,7 +56,7 @@ public function controlarOpcion(){
                                $menuPrincipal->mostrarMenu();
                         }else if(isset($_REQUEST['crearPartida'])){
                             if($menuPrincipal->crearPartida($usuarios->idUsuario($_SESSION['usuario']),$_REQUEST['nombrePartida'],$_REQUEST['contraseñaPartida'])){
-                               $menuPrincipal->mostrarPartidas($usuarios->idUsuario($_SESSION['usuario']));
+                               $menuPrincipal->mostrarPartidasEnCurso($usuarios->idUsuario($_SESSION['usuario']));
                             } else{
                                $menuPrincipal->mostrarNuevaPartida();
                             }
@@ -68,8 +68,9 @@ public function controlarOpcion(){
                             $usuarios->mostrarLogin();
                         } else if(isset($_REQUEST['partidaSeleccionada'])){
                             if($menuPrincipal->unirseAPartida($_REQUEST['partidaSeleccionada'],$usuarios->idUsuario($_SESSION['usuario']))){
-                                $partida->mostrarPartida($_REQUEST['partidaSeleccionada']);
-                            };
+                                $menuPrincipal->cambiarEstado($_REQUEST['partidaSeleccionada'],1);
+                                $menuPrincipal->mostrarPartidasEnCurso($usuarios->idUsuario($_SESSION['usuario']));
+                            }
                         } else if(isset($_REQUEST['borrarPartida'])){
                             if($menuPrincipal->borrarPartida($_REQUEST['borrarPartida'])){
                                 $menuPrincipal->mostrarPartidas($usuarios->idUsuario($_SESSION['usuario']));
