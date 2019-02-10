@@ -5,7 +5,6 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Usuarios</title>
-    <meta http-equiv="refresh" content="10">
 
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,10 +24,7 @@
 </head>
 
 <body>
-        <?php
-        $url=$_SERVER['REQUEST_URI'];
-        header("Refresh: 120; URL=$url");
-        ?>
+       
 
     <div class="container row center-align " style="width:500px;" id="formulario">
         <img class="responsive-img col s12" style="text-align:center" src="./img/logo.png">

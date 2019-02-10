@@ -290,10 +290,12 @@ public function introducirBarco($longitud,$direccion,$letra,$numero,$idUsuario,$
 
     $consultaTablero = "select idTablero from tableros where IDJugador=$idUsuario and idPartida = $idPartida";
     $tablero = mysqli_fetch_array(mysqli_query($conexion,$consultaTablero))[0];
-    echo $letra;
-    echo $numero;
+    
     switch($direccion){
-        case "vertical":    $bloquear = $this->bloquearAdyacentes($longitud,$direccion,$letra,$numero,$idUsuario,$idPartida,$tipoBarco);
+        case "vertical":    
+        
+                        if($this->comprobarEspacio($longitud,$direccion,$letra,$numero,$idUsuario,$idPartida,$tipoBarco)){
+                            $bloquear = $this->bloquearAdyacentes($longitud,$direccion,$letra,$numero,$idUsuario,$idPartida,$tipoBarco);
 
                             $insertarBloqueos = "insert into casillas (Letra,Numero,IDTablero,IDEstadoCasilla,IDTipoBarco) values";
                             for($i = 0; $i<count($bloquear);$i++){
@@ -315,8 +317,14 @@ public function introducirBarco($longitud,$direccion,$letra,$numero,$idUsuario,$
                             }
                             $insertarBarcos = substr($insertarBarcos,0,strlen($insertarBarcos)-1);
                             mysqli_query($conexion,$insertarBarcos) or die("problemas amigo;".mysqli_error($conexion));
+                        } else{
+                            return false;
+                        }
                             break;
-        case "horizontal":  $bloquear = $this->bloquearAdyacentes($longitud,$direccion,$letra,$numero,$idUsuario,$idPartida,$tipoBarco);
+        case "horizontal":  
+                            if($this->comprobarEspacio($longitud,$direccion,$letra,$numero,$idUsuario,$idPartida,$tipoBarco)){
+
+                            $bloquear = $this->bloquearAdyacentes($longitud,$direccion,$letra,$numero,$idUsuario,$idPartida,$tipoBarco);
 
                             $insertarBloqueos = "insert into casillas (Letra,Numero,IDTablero,IDEstadoCasilla,IDTipoBarco) values";
                             for($i = 0; $i<count($bloquear);$i++){
@@ -339,7 +347,9 @@ public function introducirBarco($longitud,$direccion,$letra,$numero,$idUsuario,$
                             mysqli_query($conexion,$insertarBarcos) or die("problemas amigo;".mysqli_error($conexion));
 
                             
-
+                            } else{
+                                return false;
+                            }
                             break;
 
 
@@ -501,7 +511,7 @@ public function comprobarBarcosHundidos($idPartida,$idUsuario){
         
     } 
 
-return $devolverBarcos;
+    return $devolverBarcos;
 
 
 }
@@ -584,7 +594,65 @@ public function bloquearAdyacentes($longitud,$direccion,$fila,$columna,$idUsuari
 public function comprobarEspacio($longitud,$direccion,$fila,$columna,$idUsuario,$idPartida,$tipoBarco){
 
 
+    $conexion = mysqli_connect("localhost","root","","hundirlaflota");
 
+    $consultaTableros = "select idTablero from tableros where idPartida = $idPartida and idJugador = $idUsuario";
+    $queryTableros = mysqli_query($conexion,$consultaTableros) or die ("Problemas al encontrar los tableros:".mysqli_error($conexion));
+    
+  
+    if(mysqli_num_rows($queryTableros)>0){
+       $tablero = mysqli_fetch_array($queryTableros)[0];
+
+       switch($direccion){
+        case "horizontal": 
+                            if(($longitud+$columna-1)<=10){
+                                for($i = $columna;$i<$longitud+$columna;$i++){
+
+                            
+                                    $consulta = "select idtipobarco from casillas where letra = $fila and numero=$i and idTablero = $tablero ";
+                                   
+                                    $query = mysqli_query($conexion,$consulta) or die(mysqli_error($conexion));
+                                    echo mysqli_fetch_array($query)[0];
+                                    echo mysqli_num_rows($query);
+                                        if(mysqli_num_rows($query)>0){
+                                            return false;
+                                            
+                                        } 
+                                
+        
+                                    }                
+                            } else{
+                                return false;
+                            }
+                            
+                            
+                             break;
+
+         case "vertical":   if(($longitud+$fila-1)<=10){
+         
+                                for($i = $fila;$i<$longitud+$fila;$i++){
+
+                                
+                                $consulta = "select idtipobarco from casillas where letra = $i and numero=$columna and idTablero = $tablero ";
+                                $query = mysqli_query($conexion,$consulta) or die(mysqli_error($conexion));
+                                    if(mysqli_num_rows($query)>0){
+                                        return false;
+                                        
+                                    } 
+                            
+
+                                }
+                            } else{
+                                return false;
+                            }
+                             break;
+
+
+            
+        }
+
+    return true;
+    }
 
 
 

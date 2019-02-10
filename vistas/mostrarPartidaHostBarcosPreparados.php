@@ -35,6 +35,8 @@
             <input type="hidden" name="op" value="partida">
             <?php
                 echo "<input type='hidden' name='idPartida' value=$idPartida>";
+                $numeros = [1,2,3,4,5,6,7,8,9,10];
+
             ?>
             
             <div class="col col s12 m12 l6 xl6 left white  ">
@@ -51,40 +53,89 @@
 
                         if($usuario == $host){
 
-                        
-                           $filas = [1,2,3,4,5,6,7,8,9,10];
-                           $columnas = [1,2,3,4,5,6,7,8,9,10];
-                           $posiciones;
+                            $filas = [1,2,3,4,5,6,7,8,9,10];
+                            $columnas = [1,2,3,4,5,6,7,8,9,10];
                             
-                           if($tableros[0]!=false){
-
-                            for($i = 0;$i<count($tableros[0]);$i++){
-                                $posiciones[] = $tableros[0][$i][1]."-".$tableros[0][$i][2];
-                            }
+                             
                             
-                                //EL HOST ESTÁ PRIMERO
-                                
-                                echo "<p id='mensaje'> $mensajeHost </p>";
-                                for($j = 1; $j<=10;$j++){
-                                    echo "<tr>";                        
-                                    echo "<td>".$filas[$j-1]."</td>";
-                                    for($i =1; $i<=10;$i++){
-                                        $posicion = $j."-".$i;
-                                        
-                                        if(in_array($posicion,$posiciones) != false){
-                                            
-                                            $id = $posicion."-".$_SESSION['idUsuario'];
-                                            echo "<td><button type='submit' disabled id='casillaBarco' name='casilla' value='$id'></button></td>";
-                                        } else{
-                                            $id = $posicion."-".$_SESSION['idUsuario'];
-                                            echo "<td><button type='submit' disabled id='casillaAgua' name='casilla' value='$id'></button></td>";
-                                        }
-                                        
-                                    }
-                                    
-                                    echo "</tr>";
-                                }
-                            }
+ 
+                             unset($posiciones);
+                             $posiciones;
+                             
+                             
+                             for($i = 0;$i<count($tableros[0]);$i++){
+                                 $posiciones[] = $tableros[0][$i][1]."-".$tableros[0][$i][2];
+                                 
+                             }
+ 
+                             for($i = 0;$i<count($tableros[0]);$i++){
+                                 $estados[] = $tableros[0][$i][5];
+                             }
+                             
+                             $items = array();
+                             for($i=1;$i<=10;$i++){
+                                 
+                                 for($z=1;$z<=10;$z++){
+                                     $busqueda = $i."-".$z;
+                                     if(($valor =  array_search($busqueda,$posiciones)) !== false){
+                                         $items[$i][$z] = [$posiciones[$valor],$estados[$valor]];
+ 
+                                     } else{
+                                         $items[$i][$z] = 0;
+ 
+                                     }
+ 
+                                 }
+                             }
+                             echo "<p id='mensaje'> $mensaje </p>";
+                             foreach($items as $fila=> $row) {
+                                 echo('<tr>');
+                                 $valor = $fila-1;
+                                 echo "<td>$numeros[$valor]</td>";
+                                 foreach($row as $columna=>$cell) {
+                                     
+                                     switch($cell[1]){
+                                                 
+                                                 case "Portaviones":  $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                     echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                     break;               
+                                                 case "Acorazado": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                     echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                     break;   
+                                                 case "Crucero1": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                     echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                     break;   
+                                                 case "Crucero2":$id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                     echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                     break;    
+                                                 case "Destructor1":$id = $cell[0]."-".$_SESSION['idUsuario']; 
+                                                                     echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                     break;    
+                                                 case "Destructor2":$id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                     echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                     break;    
+                                                 case "Destructor3":$id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                     echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                     break;    
+                                                 case "aguaTocada": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                     echo "<td><button type='submit' disabled id='casillaAguaTocada' name='casilla' value='$id'></button></td>";
+                                                                     break;   
+                                                 case "barcoTocado": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                     echo "<td><button type='submit' disabled id='casillaBarcoTocado' name='casilla' value='$id'></button></td>";
+                                                                     break;   
+                                                 case "bloqueado": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                     echo "<td><button type='submit' disabled id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                     break;  
+                                                     
+                                                 case 0: $id = $fila."-".$columna."-".$_SESSION['idUsuario'];
+                                                                     echo "<td><button type='submit' disabled id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                     break;   
+                                                 
+                                             }
+                                   
+                                 }
+                                 echo('</tr>');
+                               }
 
                          } else{
 
@@ -96,33 +147,90 @@
                             <button type='submit' class=' waves-effect waves-light btn col s6 green accent-3' name='vertical' value='vertical'>Vertical</button>";
                             if($tableros[1]!=false){
 
+                            $filas = [1,2,3,4,5,6,7,8,9,10];
+                            $columnas = [1,2,3,4,5,6,7,8,9,10];
+                            $posiciones;
+                                
+                            if($tableros[1]!=false){
+
+                                unset($posiciones);
+                                $posiciones;
+                                
+                                
                                 for($i = 0;$i<count($tableros[1]);$i++){
                                     $posiciones[] = $tableros[1][$i][1]."-".$tableros[1][$i][2];
+                                    
+                                }
+
+                                for($i = 0;$i<count($tableros[1]);$i++){
+                                    $estados[] = $tableros[1][$i][5];
                                 }
                                 
-                                    //EL HOST ESTÁ PRIMERO
+                                $items = array();
+                                for($i=1;$i<=10;$i++){
                                     
-                                    echo "<p id='mensaje'> $mensaje </p>";
+                                    for($z=1;$z<=10;$z++){
+                                        $busqueda = $i."-".$z;
+                                        if(($valor =  array_search($busqueda,$posiciones)) !== false){
+                                            $items[$i][$z] = [$posiciones[$valor],$estados[$valor]];
 
-                                    for($j = 1; $j<=10;$j++){
-                                        echo "<tr>";                        
-                                        echo "<td>".$filas[$j-1]."</td>";
-                                        for($i =1; $i<=10;$i++){
-                                            $posicion = $j."-".$i;
-                                            
-                                            if(in_array($posicion,$posiciones) != false){
-                                                
-                                                $id = $posicion."-".$_SESSION['idUsuario'];
-                                                echo "<td><button type='submit' disabled id='casillaBarco' name='casilla' value='$id'></button></td>";
-                                            } else{
-                                                $id = $posicion."-".$_SESSION['idUsuario'];
-                                                echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
-                                            }
-                                            
+                                        } else{
+                                            $items[$i][$z] = 0;
+
                                         }
-                                        
-                                        echo "</tr>";
+
                                     }
+                                }
+                                echo "<p id='mensaje'> $mensaje </p>";
+                                foreach($items as $fila=> $row) {
+                                    echo('<tr>');
+                                    $valor = $fila-1;
+                                    echo "<td>$numeros[$valor]</td>";
+                                    foreach($row as $columna=>$cell) {
+                                        
+                                        switch($cell[1]){
+                                                    
+                                                    case "Portaviones":  $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;               
+                                                    case "Acorazado": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;   
+                                                    case "Crucero1": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;   
+                                                    case "Crucero2":$id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;    
+                                                    case "Destructor1":$id = $cell[0]."-".$_SESSION['idUsuario']; 
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;    
+                                                    case "Destructor2":$id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;    
+                                                    case "Destructor3":$id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;    
+                                                    case "aguaTocada": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' disabled id='casillaAguaTocada' name='casilla' value='$id'></button></td>";
+                                                                        break;   
+                                                    case "barcoTocado": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' disabled id='casillaBarcoTocado' name='casilla' value='$id'></button></td>";
+                                                                        break;   
+                                                    case "bloqueado": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' disabled id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                        break;  
+                                                        
+                                                    case 0: $id = $fila."-".$columna."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                        break;   
+                                                    
+                                                }
+                                    
+                                    }
+                                    echo('</tr>');
+                                    }
+                                }
                             } else{
                                 $filas = [1,2,3,4,5,6,7,8,9,10];
                                 $columnas = [1,2,3,4,5,6,7,8,9,10];
