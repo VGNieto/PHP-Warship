@@ -39,7 +39,6 @@
             <input type="hidden" name="op" value="partida">
             <?php
                 echo "<input type='hidden' name='idPartida' value=$idPartida>";
-                $numeros = [1,2,3,4,5,6,7,8,9,10];
             ?>
             
             <div class="col s12 m12 l6 xl6 left white ">
@@ -65,7 +64,7 @@
                             }
 
                             for($i = 0;$i<count($tableros[0]);$i++){
-                                $estados[] = $tableros[0][$i][5];
+                                $estados[] = $tableros[0][$i][4];
                             }
                             
                             $items = array();
@@ -165,7 +164,7 @@
                             }
 
                             for($i = 0;$i<count($tableros[1]);$i++){
-                                $estados[] = $tableros[1][$i][5];
+                                $estados[] = $tableros[1][$i][4];
                             }
                             
                             $items = array();

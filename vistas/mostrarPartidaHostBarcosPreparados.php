@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Usuarios</title>
+    <meta http-equiv="refresh" content="120">
+
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -35,8 +37,6 @@
             <input type="hidden" name="op" value="partida">
             <?php
                 echo "<input type='hidden' name='idPartida' value=$idPartida>";
-                $numeros = [1,2,3,4,5,6,7,8,9,10];
-
             ?>
             
             <div class="col col s12 m12 l6 xl6 left white  ">
@@ -52,13 +52,7 @@
                         <?php 
 
                         if($usuario == $host){
-
-                            $filas = [1,2,3,4,5,6,7,8,9,10];
-                            $columnas = [1,2,3,4,5,6,7,8,9,10];
-                            
-                             
-                            
- 
+                          
                              unset($posiciones);
                              $posiciones;
                              
@@ -69,7 +63,7 @@
                              }
  
                              for($i = 0;$i<count($tableros[0]);$i++){
-                                 $estados[] = $tableros[0][$i][5];
+                                 $estados[] = $tableros[0][$i][4];
                              }
                              
                              $items = array();
@@ -139,16 +133,14 @@
 
                          } else{
 
-                            $filas = [1,2,3,4,5,6,7,8,9,10];
-                            $columnas = [1,2,3,4,5,6,7,8,9,10];
+                          
                             $posiciones;
                             echo "<button type='submit' class=' waves-effect waves-light btn col s6 orange darken-3' name='horizontal' value='horizontal'>Horizontal</button>
                     
                             <button type='submit' class=' waves-effect waves-light btn col s6 green accent-3' name='vertical' value='vertical'>Vertical</button>";
                             if($tableros[1]!=false){
 
-                            $filas = [1,2,3,4,5,6,7,8,9,10];
-                            $columnas = [1,2,3,4,5,6,7,8,9,10];
+                           
                             $posiciones;
                                 
                             if($tableros[1]!=false){
@@ -163,7 +155,7 @@
                                 }
 
                                 for($i = 0;$i<count($tableros[1]);$i++){
-                                    $estados[] = $tableros[1][$i][5];
+                                    $estados[] = $tableros[1][$i][4];
                                 }
                                 
                                 $items = array();
@@ -232,8 +224,7 @@
                                     }
                                 }
                             } else{
-                                $filas = [1,2,3,4,5,6,7,8,9,10];
-                                $columnas = [1,2,3,4,5,6,7,8,9,10];
+                                
                                 $posiciones;
                                 echo "<p id='mensaje'> $mensaje </p>";
 
@@ -270,9 +261,6 @@
                     <tbody>
                         <?php 
 
-                        
-                                $filas = [1,2,3,4,5,6,7,8,9,10];
-                                $columnas = [1,2,3,4,5,6,7,8,9,10];
                                 $posiciones;
                                 
                                 for($j = 1; $j<=10;$j++){

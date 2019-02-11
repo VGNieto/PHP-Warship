@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Usuarios</title>
-    <meta http-equiv="refresh" content="10">
+    <meta http-equiv="refresh" content="120">
 
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,11 +25,6 @@
 </head>
 
 <body>
-        <?php
-        $url=$_SERVER['REQUEST_URI'];
-        header("Refresh: 120; URL=$url");
-        $numeros = [1,2,3,4,5,6,7,8,9,10];
-        ?>
 
     <div class="container row center-align " style="width:500px;" id="formulario">
         <img class="responsive-img col s12" style="text-align:center" src="./img/logo.png">
@@ -69,7 +64,7 @@
                             }
 
                             for($i = 0;$i<count($tableros[0]);$i++){
-                                $estados[] = $tableros[0][$i][5];
+                                $estados[] = $tableros[0][$i][4];
                             }
                             
                             $items = array();
@@ -148,7 +143,7 @@
                             }
 
                             for($i = 0;$i<count($tableros[1]);$i++){
-                                $estados[] = $tableros[1][$i][5];
+                                $estados[] = $tableros[1][$i][4];
                             }
                             
                             $items = array();
@@ -250,7 +245,7 @@
                             }
 
                             for($i = 0;$i<count($tableros[1]);$i++){
-                                $estados[] = $tableros[1][$i][5];
+                                $estados[] = $tableros[1][$i][4];
                             }
                             
                             $items = array();
@@ -331,7 +326,7 @@
                                 }
 
                                 for($i = 0;$i<count($tableros[0]);$i++){
-                                    $estados[] = $tableros[0][$i][5];
+                                    $estados[] = $tableros[0][$i][4];
                                 }
                                 
                                 $items = array();

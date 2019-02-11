@@ -186,6 +186,9 @@ public function mostrarPartida($idPartida){
     $estado = $this->devolverEstadoPartida($idPartida);
     $host = $this->devolverHostPartida($idPartida);
     $_SESSION['partida'] = $idPartida;
+    $numeros = [1,2,3,4,5,6,7,8,9,10];
+    $filas = [1,2,3,4,5,6,7,8,9,10];
+    $columnas = [1,2,3,4,5,6,7,8,9,10];
 
     
     switch($estado){

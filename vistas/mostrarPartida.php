@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Usuarios</title>
+    <meta http-equiv="refresh" content="3">
 
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -24,7 +25,7 @@
 </head>
 
 <body>
-       
+
 
     <div class="container row center-align " style="width:500px;" id="formulario">
         <img class="responsive-img col s12" style="text-align:center" src="./img/logo.png">
@@ -35,113 +36,116 @@
             <input type="hidden" name="op" value="partida">
             <?php
                 echo "<input type='hidden' name='idPartida' value=$idPartida>";
-                $numeros = [1,2,3,4,5,6,7,8,9,10];
-
             ?>
-            
+
             <div class="col s12 m12 l6 xl6 left white ">
-               
-            <h5 class="center-align" id="titulo">TU TABLERO</h5>
-            
+
+                <h5 class="center-align" id="titulo">TU TABLERO</h5>
+
 
                 <table class="centered responsive-table">
                     <thead>
                         <tr>
-                            <th> </th><th>A</th> <th>B</th> <th>C</th><th>D</th> <th>E</th><th>F</th><th>G</th> <th>H</th><th>I</th><th>J</th>
+                            <th> </th>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>C</th>
+                            <th>D</th>
+                            <th>E</th>
+                            <th>F</th>
+                            <th>G</th>
+                            <th>H</th>
+                            <th>I</th>
+                            <th>J</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         <?php 
-                
+                        
                         if($usuario == $host){
                             echo "<button type='submit' class=' waves-effect waves-light btn col s6 orange darken-3' name='horizontal' value='horizontal'>Horizontal</button>
                     
                             <button type='submit' class=' waves-effect waves-light btn col s6 green accent-3' name='vertical' value='vertical'>Vertical</button>";
                         
-                           $filas = [1,2,3,4,5,6,7,8,9,10];
-                           $columnas = [1,2,3,4,5,6,7,8,9,10];
-                           $posiciones;
-                            
                            if($tableros[0]!=false){
 
-                            unset($posiciones);
-                            $posiciones;
-                            
-                            
-                            for($i = 0;$i<count($tableros[0]);$i++){
-                                $posiciones[] = $tableros[0][$i][1]."-".$tableros[0][$i][2];
+                                unset($posiciones);
+                                $posiciones;
                                 
-                            }
-
-                            for($i = 0;$i<count($tableros[0]);$i++){
-                                $estados[] = $tableros[0][$i][5];
-                            }
-                            
-                            $items = array();
-                            for($i=1;$i<=10;$i++){
-                                
-                                for($z=1;$z<=10;$z++){
-                                    $busqueda = $i."-".$z;
-                                    if(($valor =  array_search($busqueda,$posiciones)) !== false){
-                                        $items[$i][$z] = [$posiciones[$valor],$estados[$valor]];
-
-                                    } else{
-                                        $items[$i][$z] = 0;
-
-                                    }
-
-                                }
-                            }
-                            echo "<p id='mensaje'> $mensaje </p>";
-                            foreach($items as $fila=> $row) {
-                                echo('<tr>');
-                                $valor = $fila-1;
-                                echo "<td>$numeros[$valor]</td>";
-                                foreach($row as $columna=>$cell) {
+                                for($i = 0;$i<count($tableros[0]);$i++){
+                                    $posiciones[] = $tableros[0][$i][1]."-".$tableros[0][$i][2];
                                     
-                                    switch($cell[1]){
-                                                
-                                                case "Portaviones":  $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
-                                                                    break;               
-                                                case "Acorazado": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
-                                                                    break;   
-                                                case "Crucero1": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
-                                                                    break;   
-                                                case "Crucero2":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
-                                                                    break;    
-                                                case "Destructor1":$id = $cell[0]."-".$_SESSION['idUsuario']; 
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
-                                                                    break;    
-                                                case "Destructor2":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
-                                                                    break;    
-                                                case "Destructor3":$id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
-                                                                    break;    
-                                                case "aguaTocada": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' disabled id='casillaAguaTocada' name='casilla' value='$id'></button></td>";
-                                                                    break;   
-                                                case "barcoTocado": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' disabled id='casillaBarcoTocado' name='casilla' value='$id'></button></td>";
-                                                                    break;   
-                                                case "bloqueado": $id = $cell[0]."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' disabled id='casillaAgua' name='casilla' value='$id'></button></td>";
-                                                                    break;  
-                                                    
-                                                case 0: $id = $fila."-".$columna."-".$_SESSION['idUsuario'];
-                                                                    echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
-                                                                    break;   
-                                                
-                                            }
-                                  
                                 }
-                                echo('</tr>');
-                              }
+
+                                for($i = 0;$i<count($tableros[0]);$i++){
+                                    $estados[] = $tableros[0][$i][4];
+                                }
+                                
+                                $items = array();
+                                for($i=1;$i<=10;$i++){
+                                    
+                                    for($z=1;$z<=10;$z++){
+                                        $busqueda = $i."-".$z;
+                                        if(($valor =  array_search($busqueda,$posiciones)) !== false){
+                                            $items[$i][$z] = [$posiciones[$valor],$estados[$valor]];
+
+                                        } else{
+                                            $items[$i][$z] = 0;
+
+                                        }
+                                    }
+                                }
+                                echo "<p id='mensaje'> $mensaje </p>";
+                                foreach($items as $fila=> $row) {
+                                    echo('<tr>');
+                                    $valor = $fila-1;
+                                    echo "<td>$numeros[$valor]</td>";
+                                    foreach($row as $columna=>$cell) {
+                                        
+                                        switch($cell[1]){
+                                                    
+                                                    case "Portaviones":  $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;               
+                                                    case "Acorazado": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;   
+                                                    case "Crucero1": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;   
+                                                    case "Crucero2":$id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;    
+                                                    case "Destructor1":$id = $cell[0]."-".$_SESSION['idUsuario']; 
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;    
+                                                    case "Destructor2":$id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;    
+                                                    case "Destructor3":$id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaBarco' disabled name='casilla' value='$id'></button></td>";
+                                                                        break;    
+                                                    case "aguaTocada": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' disabled id='casillaAguaTocada' name='casilla' value='$id'></button></td>";
+                                                                        break;   
+                                                    case "barcoTocado": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' disabled id='casillaBarcoTocado' name='casilla' value='$id'></button></td>";
+                                                                        break;   
+                                                    case "bloqueado": $id = $cell[0]."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' disabled id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                        break;  
+                                                        
+                                                    case 0: $id = $fila."-".$columna."-".$_SESSION['idUsuario'];
+                                                                        echo "<td><button type='submit' id='casillaAgua' name='casilla' value='$id'></button></td>";
+                                                                        break;   
+                                                    
+                                                }
+                                    
+                                    }
+                                    echo('</tr>');
+                                }
+
                             } else{
                                 echo "<p id='mensaje'> $mensaje </p>";
                                 for($j = 1; $j<=10;$j++){
@@ -157,9 +161,6 @@
                                 }
                             }
                          } else{
-
-                            $filas = [1,2,3,4,5,6,7,8,9,10];
-                            $columnas = [1,2,3,4,5,6,7,8,9,10];
                             $posiciones;
                             echo "<p id='mensaje'> $mensajeContrincante </p>";
                             for($j = 1; $j<=10;$j++){
@@ -175,11 +176,10 @@
                             }
                         }
                          
-                         
                          ?>
 
                 </table>
-                    
+
             </div>
 
             <div class="col s12 m12 l6 xl6 right white ">
@@ -188,18 +188,24 @@
                 <table class="centered responsive-table">
                     <thead>
                         <tr>
-                            <th> </th><th>A</th> <th>B</th> <th>C</th><th>D</th> <th>E</th><th>F</th><th>G</th> <th>H</th><th>I</th><th>J</th>
+                            <th> </th>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>C</th>
+                            <th>D</th>
+                            <th>E</th>
+                            <th>F</th>
+                            <th>G</th>
+                            <th>H</th>
+                            <th>I</th>
+                            <th>J</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         <?php 
-
-                                
-                                $filas = [1,2,3,4,5,6,7,8,9,10];
-                                $columnas = [1,2,3,4,5,6,7,8,9,10];
+                                unset($posiciones);
                                 $posiciones;
-                                
                                 for($j = 1; $j<=10;$j++){
                                     echo "<tr>";                        
                                     echo "<td>".$filas[$j-1]."</td>";
@@ -211,20 +217,20 @@
                                     
                                     echo "</tr>";
                                 }                         
-                         
                          ?>
 
                 </table>
             </div>
-            <br> 
-            <button type="submit" style="margin-top:15px;" class=" waves-effect waves-light btn col s12 red white-text" name="volverAlMenu" value="volverAlMenu">Volver
+            <br>
+            <button type="submit" style="margin-top:15px;" class=" waves-effect waves-light btn col s12 red white-text"
+                name="volverAlMenu" value="volverAlMenu">Volver
                 al menú<i class="large material-icons right">arrow_back</i></button>
-            </form>
-           
-    
-        
+        </form>
+
+
+
     </div>
-    
+
 
     <script type="text/javascript" src="./js/materialize.min.js"></script>
 
