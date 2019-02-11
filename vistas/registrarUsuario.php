@@ -30,13 +30,11 @@
                 <input type="hidden" name="op" value="login">
                 <div class="input-field col s6">
                     <i class="material-icons prefix black-text">account_circle</i>
-                    <input type="text" id="icon_prefix" name="registroUsuario" class="input-field validate" value="">
-                    <label for="icon_prefix" class="black-text">Nuevo Usuario</label>
+                    <input type="text" id="icon_prefix" name="registroUsuario" class="input-field validate" value="" placeholder='Nuevo Usuario'>
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix black-text">lock </i>
-                    <input type="text" id="icon_prefix2" name="registroContraseña" class="input-field" value="">
-                    <label for="icon_prefix2" class="black-text">Nueva contraseña</label>
+                    <input type="text" id="icon_prefix2" name="registroContraseña" class="input-field" value="" placeholder='Nueva Contraseña'>
                 </div>
             </div>
             <button type="submit" class=" waves-effect waves-light btn red darken-1" name="registrarUsuario"

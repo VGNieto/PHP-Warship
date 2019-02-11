@@ -30,14 +30,12 @@
             <div id="menu" class="z-depth-5 white">
                 <div class="input-field col s6">
                     <i class="material-icons prefix black-text">videogame_asset</i>
-                    <input type="text" id="icon_prefix" name="nombrePartida" class="input-field validate" value="">
-                    <label for="icon_prefix" class="black-text">Nombre de la Partida</label>
+                    <input type="text" id="icon_prefix" name="nombrePartida" class="input-field validate" value="" placeholder='Nombre de la Partida'>
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix black-text">lock </i>
                     <input type="text" id="icon_prefix2" name="contraseñaPartida" class="input-field white-text"
-                        value="">
-                    <label for="icon_prefix2" class="black-text">Contraseña (opcional)</label>
+                        value="" placeholder='Contraseña (Opcional)'>
                 </div>
             </div>
             <button type="submit" class=" waves-effect waves-light btn red darken-1" name="crearPartida" value="crearPartida">Crear

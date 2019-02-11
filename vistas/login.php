@@ -30,13 +30,13 @@
             <div id="menu" class="z-depth-5 white">
                 <div class="input-field col s6">
                     <i class="material-icons prefix black-text">account_circle</i>
-                    <input type="text" id="icon_prefix" name="loginUsuario" class="input-field validate" value="">
-                    <label for="icon_prefix" class="black-text">Usuario</label>
+                    <input type="text" id="icon_prefix" name="loginUsuario" class="input-field validate" value="" placeholder='Usuario'>
+                    
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix black-text">lock </i>
-                    <input type="text" id="icon_prefix2" name="loginContraseña" class="input-field" value="">
-                    <label for="icon_prefix2" class="black-text">Contraseña</label>
+                    <input type="text" id="icon_prefix2" name="loginContraseña" class="input-field" value="" placeholder='Contraseña'>
+                    
                 </div>
             </div>
             <button type="submit" class=" waves-effect waves-light btn red darken-1" name="loginDone" value="Iniciar Sesión">Iniciar
